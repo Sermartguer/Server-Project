@@ -1,8 +1,22 @@
 <?php
+	session_start();
+	include ($_SERVER['DOCUMENT_ROOT'] . "/Server-Project/modules/rooms/utils/functions_rooms.inc.php");
+	include ($_SERVER['DOCUMENT_ROOT'] . "/Server-Project/utils/upload.php");
+
 	echo "<br>";echo "<br>";
 	
+	//////////////////////////////////////////////////////////////// upload
+		if ((isset($_GET["upload"])) && ($_GET["upload"] == true)) {
+		    $result_avatar = upload_files();
+		    $_SESSION['result_avatar'] = $result_avatar;
+		    //echo debug($_SESSION['result_avatar']); //se mostraría en alert(response); de dropzone.js
+		}
 
-	
+		//////////////////////////////////////////////////////////////// alta_users_json
+		if ((isset($_POST['alta_users_json']))) {
+		    alta_users();
+		}
+
 	include 'modules/rooms/utils/functions_rooms.inc.php';
 	
 	if ($_POST) {
