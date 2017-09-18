@@ -17,13 +17,23 @@
 		    alta_users();
 		}
 
-	include 'modules/rooms/utils/functions_rooms.inc.php';
+
+	//include 'modules/rooms/utils/functions_rooms.inc.php';
 	
-	if ($_POST) {
+
+	
+	function alta_users() {
 		
-		$result = validate_user();
+		$jsondata = array();
+	    $usersJSON = json_decode($_POST["alta_users_json"], true);
+	    $result = validate_user($usersJSON);
 		
-		if ($result['resultado']) {
+	    if (empty($_SESSION['result_avatar'])) {
+        	$_SESSION['result_avatar'] = array('resultado' => true, 'error' => "", 'datos' => 'media/default-avatar.png');
+    	}
+    	$result_avatar = $_SESSION['result_avatar'];
+
+		if (($result['resultado']) && ($result_avatar['resultado'])) {
 			$arrArgument = array(
 				'sdesc' => ucfirst($result['datos']['sdesc']),
 				'maxguest' => strtoupper($result['datos']['maxguest']),
@@ -39,7 +49,7 @@
 				'name' => ucfirst($result['datos']['name']),
 				'email' => $result['datos']['email'],
 				'country' => $result['datos']['country'],
-
+				'avatar' => $result_avatar['datos']
 
 				
 			);
@@ -50,14 +60,72 @@
 			$_SESSION['msje'] = $mensaje;
 	
 			$callback = "index.php?module=rooms&view=results_rooms";
-			redirect($callback);
+			$jsondata["success"] = true;
+	        $jsondata["redirect"] = $callback;
+	        echo json_encode($jsondata);
+        	exit;
 		} else {
-			$error = $result['error'];
+			$jsondata["success"] = false;
+	        $jsondata["error"] = $result['error'];
+	        $jsondata["error_avatar"] = $result_avatar['error'];
+
+	        $jsondata["success1"] = false;
+	        if ($result_avatar['resultado']) {
+	            $jsondata["success1"] = true;
+	            $jsondata["img_avatar"] = $result_avatar['datos'];
+	        }
+	        header('HTTP/1.0 400 Bad error');
+	        echo json_encode($jsondata);
 
 		}
+		if (isset($_GET["delete"]) && $_GET["delete"] == true) {
+    $_SESSION['result_avatar'] = array();
+    $result = remove_files();
+    if ($result === true) {
+        echo json_encode(array("res" => true));
+    } else {
+        echo json_encode(array("res" => false));
+    }
+}
+
+//////////////////////////////////////////////////////////////// load
+if (isset($_GET["load"]) && $_GET["load"] == true) {
+    $jsondata = array();
+    if (isset($_SESSION['user'])) {
+        //echo debug($_SESSION['user']);
+        $jsondata["user"] = $_SESSION['user'];
+    }
+    if (isset($_SESSION['msje'])) {
+        //echo $_SESSION['msje'];
+        $jsondata["msje"] = $_SESSION['msje'];
+    }
+    close_session();
+    echo json_encode($jsondata);
+    exit;
+}
+
+function close_session() {
+    unset($_SESSION['user']);
+    unset($_SESSION['msje']);
+    $_SESSION = array(); // Destruye todas las variables de la sesión
+    session_destroy(); // Destruye la sesión
+}
+
+/////////////////////////////////////////////////// load_data
+if ((isset($_GET["load_data"])) && ($_GET["load_data"] == true)) {
+    $jsondata = array();
+    if (isset($_SESSION['user'])) {
+        $jsondata["user"] = $_SESSION['user'];
+        echo json_encode($jsondata);
+        exit;
+    } else {
+        $jsondata["user"] = "";
+        echo json_encode($jsondata);
+        exit;
+    }
 	}
 	
-	include 'modules/rooms/view/create_rooms.php';
+	//include 'modules/rooms/view/create_rooms.php';
 
 
 

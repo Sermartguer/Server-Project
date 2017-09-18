@@ -1,5 +1,5 @@
 <?php
-function validate_user() {
+function validate_user($value) {
     $error = array();
     $valido = true;
     $filtro = array(

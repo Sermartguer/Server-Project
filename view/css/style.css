@@ -73,7 +73,7 @@ hr.star-light {
     border-top: solid 5px
 
 }
-freelancer.min.css:31
+
 hr.star-light, hr.star-primary {
     max-width: 250px;
     margin: 25px auto 30px;
@@ -83,3 +83,20 @@ hr.star-light, hr.star-primary {
     border-top: solid 5px;
 }
 
+.msg{
+    color: black;
+    font-weight: bold;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 10px;
+    position: absolute;
+    
+    text-transform: uppercase;
+    min-width: 121px;
+}
+.msg_ok{
+    background: #589D05;
+}
+.msg_error{
+    background: red;
+}

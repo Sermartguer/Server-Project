@@ -1,3 +1,7 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.css">
+
 <script type="text/javascript" src="modules/rooms/view/js/rooms.js"></script>
 <section id="contact-page">
     <div class="container mt-5">
@@ -226,31 +230,31 @@
                                         <label for="">
                                             <strong class="text-uppercase">First aid kit</strong>
                                         </label> 
-                                        <input type="checkbox" name="components[]" value="Botiquin">
+                                        <input type="checkbox" name="components[]" class="msjcompo" value="Botiquin">
                                     </div>
                                     <div class="col-6 col-sm-3 col-md-4 col-lg-3 col-xl-3">
                                         <label for="">
                                             <strong class="text-uppercase">Latch</strong>
                                         </label>
-                                        <input type="checkbox" name="components[]" value="Pestillo en la puerta">
+                                        <input type="checkbox" name="components[]" class="msjcompo" value="Pestillo en la puerta">
                                     </div>
                                     <div class="col-6 col-sm-4 col-md-6 col-lg-5 col-xl-4">
                                         <label for="">
                                             <strong class="text-uppercase">Extinguisher</strong>
                                         </label>
-                                        <input type="checkbox" name="components[]" value="Extintor de incendios">
+                                        <input type="checkbox" name="components[]" class="msjcompo" value="Extintor de incendios">
                                     </div>
                                     <div class="col-6 col-sm-4 col-md-6 col-lg-5 col-xl-4">
                                         <label for="">
                                             <strong class="text-uppercase">Security File</strong>
                                         </label>
-                                           <input type="checkbox" name="components[]" value="Ficha de instrucciones de seguridad">
+                                           <input type="checkbox" name="components[]" class="msjcompo" value="Ficha de instrucciones de seguridad">
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                         <label for="">
                                             <strong class="text-uppercase" style="display: none">Security File</strong>
                                         </label>
-                                           <input type="checkbox" name="components[]" value="Ficha de instrucciones de seguridad" style="display: none" checked>
+                                           <input type="checkbox" name="components[]" class="msjcompo" value="Ficha de instrucciones de seguridad" style="display: none" checked>
                                     </div>
                                 </div>
                                 <div id="components"><?php
@@ -282,48 +286,48 @@
                                     <!--Row1-->
                                     <div class="row justify-content-md-center">
                                         <div class="col-4 col-sm-4 col-md-5 col-lg-4 col-xl-4">
-                                            <input type="checkbox" name="services[]" value="Cocina">
+                                            <input type="checkbox" name="services[]" class="msjservices" value="Cocina">
                                             <label for=""><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Kitchen</strong></label>  
                                         </div>
                                         <div class="col-4 col-sm-4 col-md-5 col-lg-4 col-xl-4">
-                                            <input type="checkbox" name="services[]" value="Internet">
+                                            <input type="checkbox" name="services[]" class="msjservices" value="Internet">
                                             <label for=""><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Internet</strong></label> 
                                         </div>
                                         <div class="col-3 col-sm-3 col-md-4 col-lg-3 col-xl-2">
-                                            <input type="checkbox" name="services[]" value="TV">
+                                            <input type="checkbox" name="services[]" class="msjservices" value="TV">
                                             <label for=""><i class="fa fa-television" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">TV</strong></label>
                                         </div>  
 
                                         <div class="col-4 col-sm-4 col-md-5 col-lg-4 col-xl-4">
-                                            <input type="checkbox" name="services[]" value="Calefaccion">
+                                            <input type="checkbox" name="services[]" class="msjservices" value="Calefaccion">
                                             <label for=""><i class="fa fa-thermometer-empty" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Heating</strong></label>
                                         </div>
                                         <div class="col-5 col-sm-5 col-md-8 col-lg-6 col-xl-5">
-                                            <input type="checkbox" name="services[]" value="Aire Acondicionado">
+                                            <input type="checkbox" name="services[]" class="msjservices" value="Aire Acondicionado">
                                             <label for=""><i class="fa fa-snowflake-o" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Air conditioner</strong></label>
                                         </div> 
 
                                         <div class="col-3 col-sm-3 col-md-4 col-lg-3 col-xl-3">
-                                                <input type="checkbox" name="services[]" value="Mascotas">
+                                                <input type="checkbox" name="services[]" class="msjservices" value="Mascotas">
                                                 <label for=""><i class="fa fa-paw" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Pets</strong></label> 
                                         </div>
                                         
                                         <div class="col-5 col-sm-5 col-md-6 col-lg-5 col-xl-4">
-                                            <input type="checkbox" name="services[]" value="Elementos Basicos">
+                                            <input type="checkbox" name="services[]" class="msjservices" value="Elementos Basicos">
                                             <label for=""><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Core items</strong></label> 
                                         </div>
 
                                         <div class="col-6 col-sm-6 col-md-9 col-lg-7 col-xl-6">
-                                            <input type="checkbox" name="services[]" value="FreeAparcamiento">
+                                            <input type="checkbox" name="services[]" class="msjservices" value="FreeAparcamiento">
                                             <label for=""><i class="fa fa-car" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<strong class="text-uppercase">Free on-site parking</strong></label> 
                                         </div>
 
                                         <div class="col-5 col-sm-5 col-md-8 col-lg-6 col-xl-5">
-                                            <input type="checkbox" name="services[]" value="Rutas proximas">
+                                            <input type="checkbox" name="services[]" class="msjservices" value="Rutas proximas">
                                             <label for=""><i class="fa fa-bicycle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<strong class="text-uppercase">Nearby Routes</strong></label> 
                                         </div>
                                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                            <input type="checkbox" name="services[]" value="Rutas proximas" style="display: none" checked>
+                                            <input type="checkbox" name="services[]" class="msjservices" value="Rutas proximas" style="display: none" checked>
                                             <label for="" style="display: none"><i class="fa fa-bicycle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<strong class="text-uppercase" style="display: none"></strong></label> 
                                         </div>
                                         
@@ -643,7 +647,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div class="form-group" id="progress">
+                        <div id="bar"></div>
+                        <div id="percent">0%</div >
+                    </div>
+
+                    <div class="msg"></div>
+                    <br/>
+                    <div id="dropzone" class="dropzone"></div><br/>
+                    <br/>
+                    <br/>
+                    <br/>
 
 
                             </div><!--End col62-->
