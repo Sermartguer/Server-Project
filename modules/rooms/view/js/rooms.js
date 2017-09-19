@@ -295,15 +295,17 @@ function validate_rooms(){
 
     $(".error").remove();
         //Short Description
-       /* if ($("#sdesc").val() == "" || $("#sdesc").val() == "Introduce short description") {
+
+        //Desctivar para testeo en php
+       if ($("#sdesc").val() == "" || $("#sdesc").val() == "Introduce short description") {
             $("#sdesc").focus().after("<span class='error' style='color: #ff0000'>Introduce a short description, please</span>");
             return false;
         } else if (!string_reg.test($("#sdesc").val())) {
             $("#sdesc").focus().after("<span class='error' style='color: #ff0000'>Name must be 2 to 30 letters</span>");
             return false;
-        }*/
+        }
         //Date Start
-        if ($("#date_start").val() == "" || $("#date_start").val() == "Introduce date of birth") {
+        else if ($("#date_start").val() == "" || $("#date_start").val() == "Introduce date of birth") {
             $("#date_start").focus().after("<span class='error' style='color: #ff0000'>Introduce date of birth</span>");
             return false;
         } else if (!date_reg.test($("#date_start").val())) {
@@ -367,11 +369,13 @@ function validate_rooms(){
             //console.log(xhr.responseText);
             //console.log(xhr.responseJSON);
 
-        if (xhr.responseJSON.error.sdesc)
-                $("#sdesc").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.sdesc + "</span>");
+        
 
         if (xhr.responseJSON.error.maxguest)
                 $("#maxguest").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.maxguest + "</span>");
+
+        if (xhr.responseJSON.error.numbrooms)
+                $("#numbrooms").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.numbrooms + "</span>");
 
         });
 
