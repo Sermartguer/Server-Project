@@ -27,18 +27,18 @@ function validate_user($value) {
     );
     
 
-    $resultado = filter_input_array(INPUT_POST, $filtro);
+    $resultado = filter_var_array($value, $filtro);
     
     //no filter
-    $resultado['maxguest'] = $_POST['maxguest'];
-    $resultado['numbrooms'] = $_POST['numbrooms'];
-    $resultado['numbbeds'] = $_POST['numbbeds'];
-    $resultado['numbbaths'] = $_POST['numbbaths'];
-    $resultado['dayprice'] = $_POST['dayprice'];
-    $resultado['weeklyprice'] = $_POST['weeklyprice'];
-    $resultado['country'] = $_POST['country'];
-    $resultado['services'] = $_POST['services'];
-    $resultado['components'] = $_POST['components'];
+    $resultado['maxguest'] = $value['maxguest'];
+    $resultado['numbrooms'] = $value['numbrooms'];
+    $resultado['numbbeds'] = $value['numbbeds'];
+    $resultado['numbbaths'] = $value['numbbaths'];
+    $resultado['dayprice'] = $value['dayprice'];
+    $resultado['weeklyprice'] = $value['weeklyprice'];
+    $resultado['country'] = $value['country'];
+    $resultado['services'] = $value['services'];
+    $resultado['components'] = $value['components'];
 
     /*if ($resultado['date_start']) {
         //validate to user's over 16
@@ -51,9 +51,9 @@ function validate_user($value) {
     }*/
 
 
-    if ($resultado['date_start'] && $resultado['end_date']) {
+    if ($value['date_start'] && $value['end_date']) {
         //compare date of birth with end_date
-        $dates = valida_dates($_POST['date_start'], $_POST['end_date']);
+        $dates = valida_dates($value['date_start'], $value['end_date']);
 
         if (!$dates) {
             $error['end_date'] = 'Please, minimum 1 day';
@@ -62,42 +62,42 @@ function validate_user($value) {
     }
 
 
-    if ($_POST['maxguest'] === 'Select One') {
+    if ($resultado['maxguest'] === 'Select One') {
         $error['maxguest'] = "You haven't select the maximum guests.";
         $valido = false;
     }
-    if ($_POST['numbrooms']=== 'Select One'){
+    if ($resultado['numbrooms']=== 'Select One'){
         $error['numbrooms']="You haven't select the number of rooms.";
         $valido = false;
     }
-    if($_POST['numbbeds'] === 'Select One'){
+    if($resultado['numbbeds'] === 'Select One'){
         $error['numbbeds'] = "You haven't select the number of beds";
         $valido = false;
     }
-    if($_POST['numbbaths'] === 'Select One'){
+    if($resultado['numbbaths'] === 'Select One'){
         $error['numbbaths'] = "You haven't select the number of baths";
         $valido = false;
     }
-    if($_POST['dayprice'] === 'Select One'){
+    if($resultado['dayprice'] === 'Select One'){
         $error['dayprice'] = "You haven't select the daily price";
         $valido = false;
     }
-    if($_POST['weeklyprice'] === 'Select One'){
+    if($resultado['weeklyprice'] === 'Select One'){
         $error['weeklyprice'] = "You haven't select the weekly price";
         $valido = false;
     }
-    if($_POST['country'] === 'Select One'){
+    if($resultado['country'] === 'Select One'){
         $error['country'] = "You haven't select the weekly price";
         $valido = false;
     }
 
-    if(count($_POST['components']) <=1){
-        $message=count($_POST['components']);
+    if(count($resultado['components']) <=1){
+        
          
         $error['components'] = "Select 1 or more.";
         $valido = false;
     }
-    if(count($_POST['services']) <=1){
+    if(count($resultado['services']) <=1){
        
         $error['services'] = "Select 1 or more.";
         $valido = false;
@@ -106,14 +106,14 @@ function validate_user($value) {
     if ($resultado != null && $resultado) {
 
 
-        if (!$resultado['sdesc']) {
+        if (!$value['sdesc']) {
             $error['sdesc'] = 'Name must be 2 to 20 letters';
             $valido = false;
         }
 
         
 
-        if (!$resultado['email']) {
+        if (!$value['email']) {
             $error['email'] = 'error format email (example@example.com)';
             $valido = false;
         }
@@ -121,13 +121,13 @@ function validate_user($value) {
 
         
 
-        if (!$resultado['name']) {
+        if (!$value['name']) {
             $error['name'] = 'Name must be 2 to 30 letters';
             $valido = false;
         }
 
-        if (!$resultado['date_start']) {
-            if($_POST['date_start'] == ""){
+        if (!$value['date_start']) {
+            if($value['date_start'] == ""){
                 $error['date_start'] = "this camp can't empty";
                 $valido = false;  
             }else{
@@ -136,8 +136,8 @@ function validate_user($value) {
             }
         }
 
-        if (!$resultado['end_date']) {
-            if($_POST['end_date'] == ""){
+        if (!$value['end_date']) {
+            if($value['end_date'] == ""){
                 $error['end_date'] = "this camp can't empty";
                 $valido = false;  
             }else{

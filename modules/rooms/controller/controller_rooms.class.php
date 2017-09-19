@@ -17,7 +17,7 @@
 
 		//////////////////////////////////////////////////////////////// alta_users_json
 		if ((isset($_POST['alta_rooms_json']))) {
-			console.log("aaaa");
+		    
 		    alta_users();
 		}
 
@@ -27,9 +27,9 @@
 
 	
 	function alta_users() {
-		console.log("asdadas");
+		
 		$jsondata = array();
-	    $usersJSON = json_decode($_POST["alta_users_json"], true);
+	    $usersJSON = json_decode($_POST["alta_rooms_json"], true);
 	    $result = validate_user($usersJSON);
 		
 	    if (empty($_SESSION['result_avatar'])) {
@@ -69,20 +69,26 @@
 	        echo json_encode($jsondata);
         	exit;
 		} else {
-			$jsondata["success"] = false;
-	        $jsondata["error"] = $result['error'];
-	        $jsondata["error_avatar"] = $result_avatar['error'];
 
-	        $jsondata["success1"] = false;
-	        if ($result_avatar['resultado']) {
-	            $jsondata["success1"] = true;
-	            $jsondata["img_avatar"] = $result_avatar['datos'];
-	        }
-	        header('HTTP/1.0 400 Bad error');
-	        echo json_encode($jsondata);
+			//$error = $result['error'];
+        //$error_avatar = $result_avatar['error'];
+        $jsondata["success"] = false;
+        $jsondata["error"] = $result['error'];
+        $jsondata["error_avatar"] = $result_avatar['error'];
 
-		}
-		if (isset($_GET["delete"]) && $_GET["delete"] == true) {
+        $jsondata["success1"] = false;
+        if ($result_avatar['resultado']) {
+            $jsondata["success1"] = true;
+            $jsondata["img_avatar"] = $result_avatar['datos'];
+        }
+        header('HTTP/1.0 400 Bad error');
+        echo json_encode($jsondata);
+        //exit;
+    }
+}
+
+		//////////////////////////////////////////////////////////////// delete
+if (isset($_GET["delete"]) && $_GET["delete"] == true) {
     $_SESSION['result_avatar'] = array();
     $result = remove_files();
     if ($result === true) {
@@ -97,7 +103,7 @@ if (isset($_GET["load"]) && $_GET["load"] == true) {
     $jsondata = array();
     if (isset($_SESSION['rooms'])) {
         //echo debug($_SESSION['user']);
-        $jsondata["user"] = $_SESSION['rooms'];
+        $jsondata["rooms"] = $_SESSION['rooms'];
     }
     if (isset($_SESSION['msje'])) {
         //echo $_SESSION['msje'];
@@ -127,16 +133,4 @@ if ((isset($_GET["load_data"])) && ($_GET["load_data"] == true)) {
         echo json_encode($jsondata);
         exit;
     }
-	}
-	
-	//include 'modules/rooms/view/create_rooms.php';
-
-	/*if (isset($_POST['SubmitRooms'])) {
-		$_SESSION=$_POST;
-
-		$callback="index.php?module=rooms&view=results_rooms";
-		//die('<script>window.location.href="'.$callback .'";</script>');
-
-		redirect($callback);
-	}		
-	include ('modules/rooms/view/create_rooms.php');*/
+}
