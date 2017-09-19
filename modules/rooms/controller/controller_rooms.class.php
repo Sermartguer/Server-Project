@@ -4,14 +4,14 @@
 	include ($_SERVER['DOCUMENT_ROOT'] . "/Server-Project/modules/rooms/utils/functions_rooms.inc.php");
 	include ($_SERVER['DOCUMENT_ROOT'] . "/Server-Project/utils/upload.php");
 
-	echo "<br>";
+	//echo "<br>";
 
-	echo "<br>";
+	//echo "<br>";
 	
 	//////////////////////////////////////////////////////////////// upload
 		if ((isset($_GET["upload"])) && ($_GET["upload"] == true)) {
-		    $result_avatar = upload_files();
-		    $_SESSION['result_avatar'] = $result_avatar;
+		  $result_avatar = upload_files();
+		   $_SESSION['result_avatar'] = $result_avatar;
 		    //echo debug($_SESSION['result_avatar']); //se mostraría en alert(response); de dropzone.js
 		}
 
@@ -27,6 +27,30 @@
 
 	
 	function alta_users() {
+
+		/*echo json_encode("pepe");
+        	die();*/
+
+        	/*echo "pepe";
+        	exit;*/
+
+		/*header('HTTP/1.0 400 Bad error');
+        	echo "pepe";
+        	exit;*/
+/*
+		$callback = "index.php?module=rooms&view=results_rooms";
+			$jsondata["success"] = true;
+	        $jsondata["redirect"] = $callback;
+	        echo json_encode($jsondata);
+	        die();*/
+
+			/*header('HTTP/1.0 400 Bad error');
+	        $callback = "index.php?module=rooms&view=results_rooms";
+			$jsondata["success"] = true;
+	        $jsondata["redirect"] = $callback;
+	        echo json_encode($jsondata);
+	        die();*/
+
 		
 		$jsondata = array();
 	    $usersJSON = json_decode($_POST["alta_rooms_json"], true);
@@ -36,8 +60,9 @@
         	$_SESSION['result_avatar'] = array('resultado' => true, 'error' => "", 'datos' => 'media/default-avatar.png');
     	}
     	$result_avatar = $_SESSION['result_avatar'];
-
+    	
 		if (($result['resultado']) && ($result_avatar['resultado'])) {
+			
 			$arrArgument = array(
 				'sdesc' => ucfirst($result['datos']['sdesc']),
 				'maxguest' => strtoupper($result['datos']['maxguest']),

@@ -51,7 +51,7 @@ function validate_user($value) {
     }*/
 
 
-    if ($value['date_start'] && $value['end_date']) {
+    if ($resultado['date_start'] && $resultado['end_date']) {
         //compare date of birth with end_date
         $dates = valida_dates($value['date_start'], $value['end_date']);
 
@@ -106,14 +106,14 @@ function validate_user($value) {
     if ($resultado != null && $resultado) {
 
 
-        if (!$value['sdesc']) {
+        if (!$resultado['sdesc']) {
             $error['sdesc'] = 'Name must be 2 to 20 letters';
             $valido = false;
         }
 
         
 
-        if (!$value['email']) {
+        if (!$resultado['email']) {
             $error['email'] = 'error format email (example@example.com)';
             $valido = false;
         }
@@ -121,13 +121,13 @@ function validate_user($value) {
 
         
 
-        if (!$value['name']) {
+        if (!$resultado['name']) {
             $error['name'] = 'Name must be 2 to 30 letters';
             $valido = false;
         }
 
-        if (!$value['date_start']) {
-            if($value['date_start'] == ""){
+        if (!$resultado['date_start']) {
+            if($resultado['date_start'] == ""){
                 $error['date_start'] = "this camp can't empty";
                 $valido = false;  
             }else{
@@ -136,8 +136,8 @@ function validate_user($value) {
             }
         }
 
-        if (!$value['end_date']) {
-            if($value['end_date'] == ""){
+        if (!$resultado['end_date']) {
+            if($resultado['end_date'] == ""){
                 $error['end_date'] = "this camp can't empty";
                 $valido = false;  
             }else{
@@ -148,12 +148,13 @@ function validate_user($value) {
     } else {
         $valido = false;
     };
+    
     return $return = array('resultado' => $valido, 'error' => $error, 'datos' => $resultado);
 }
 
 function valida_dates($start_days, $dayslight) {
 
-    /*$start_day = date("m/d/Y", strtotime($start_days));
+     $start_day = date("m/d/Y", strtotime($start_days));
     $daylight = date("m/d/Y", strtotime($dayslight));
 
     list($mes_one, $dia_one, $anio_one) = split('/', $start_day);
@@ -161,20 +162,9 @@ function valida_dates($start_days, $dayslight) {
 
     $dateOne = new DateTime($anio_one . "-" . $mes_one . "-" . $dia_one);
     $dateTwo = new DateTime($anio_two . "-" . $mes_two . "-" . $dia_two);
-*/
-    $date = date_create($start_days);
-    $datetime1= date_format($date, 'Y-m-d');
-
-    $datetwo = date_create($dayslight);
-    $datetime2 = date_format($datetwo, 'Y-m-d');
-    echo $datetime1;
 
 
-   /*$datetime1 = new DateTime($start_days);
-    $datetime2 = new DateTime($dayslight);
-    $interval = $datetime1->diff($datetime2);
-    echo $interval->format('%R%a días');*/
-    if ($datetime1 < $datetime2) {
+ if ($dateOne <= $dateTwo) {
         return true;
     }
     return false;

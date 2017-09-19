@@ -82,12 +82,16 @@ jQuery.fn.fill_or_clean = function () {
 
 Dropzone.autoDiscover = false;
 $(document).ready(function () {
+//
+
 
     $('#SubmitRooms').click(function () {
+
         validate_rooms();
     });
 //Control de seguridad para evitar que al volver atrás de la pantalla results a create, no nos imprima los datos
-    $.get("/Server-Project/modules/rooms/controller/controller_rooms.class.php?load_data=true",
+   
+   /* $.get("/Server-Project/modules/rooms/controller/controller_rooms.class.php?load_data=true",
             function (response) {
                 //alert(response.user);
                 if (response.user === "") {
@@ -118,27 +122,39 @@ $(document).ready(function () {
                     //siempre que creemos un plugin debemos llamarlo, sino no funcionará
                 $(this).fill_or_clean();
                 } else {
-                    $("#name").val( response.user.name);
-                    $("#last_name").val( response.user.last_name);
-                    $("#birth_date").val( response.user.birth_date);
-                    $("#title_date").val( response.user.title_date);
-                    $("#address").val( response.user.address);
-                    $("#user").val( response.user.user);
-                    $("#pass").val( response.user.pass);
-                    $("#conf_pass").val( response.user.conf_pass);
-                    $("#email").val( response.user.email);
-                    $("#conf_email").val( response.user.conf_email);
-                    $("#en_lvl").val( response.user.en_lvl);
-                    var interests = response.user.interests;
-                    var inputElements = document.getElementsByClassName('messageCheckbox');
-                    for (var i = 0; i < interests.length; i++) {
+                    $("#sdesc").val(response.rooms.sdesc);
+                    $("#date_start").val(response.rooms.date_start);
+                    $("#end_date").val(response.rooms.date);
+                    $("#name").val(response.rooms.name);
+                    $("#email").val( response.rooms.email);
+                    $("#maxguest").val(response.rooms.maxguest);
+                    $("#numbrooms").val(response.rooms.numbrooms);
+                    $("#numbbeds").val(response.rooms.numbbeds);
+                    $("#numbbaths").val(response.rooms.numbbaths);
+                    $("#dayprice").val(response.rooms.dayprice);
+                    $("#weeklyprice").val(response.rooms.weeklyprice);
+                    $("#country").val(response.rooms.country);
+
+                    
+                    var inputcompo = response.rooms.inputcompo;
+                     var inputservices = document.getElementsByClassName('msjservices');
+                    var inputElements = document.getElementsByClassName('msjcompo');
+                    for (var i = 0; i < inputcompo.length; i++) {
                         for (var j = 0; j < inputElements.length; j++) {
-                            if(interests[i] ===inputElements[j] )
+                            if(inputcompo[i] ===inputElements[j] )
                                 inputElements[j].checked = true;
                         }
                     }
+
+                    for (var i = 0; i < inputservices.length; i++) {
+                        if (inputservices[i].checked) {
+                            inputservices[i].checked = false;
+                        }
+                    }
+
                 }
             }, "json");
+            */
 
                 //Dropzone function //////////////////////////////////
     $("#dropzone").dropzone({
@@ -238,7 +254,7 @@ $(document).ready(function () {
 function validate_rooms(){
     var result = true;
 
-    var sdesc = document.getElementById('sdesc').value;
+    //var sdesc = document.getElementById('sdesc').value;
     var maxguest = document.getElementById('maxguest').value;
     var numbrooms = document.getElementById('numbrooms').value;
     var date_start = document.getElementById('date_start').value;
@@ -279,15 +295,15 @@ function validate_rooms(){
 
     $(".error").remove();
         //Short Description
-        if ($("#sdesc").val() == "" || $("#sdesc").val() == "Introduce short description") {
+       /* if ($("#sdesc").val() == "" || $("#sdesc").val() == "Introduce short description") {
             $("#sdesc").focus().after("<span class='error' style='color: #ff0000'>Introduce a short description, please</span>");
             return false;
         } else if (!string_reg.test($("#sdesc").val())) {
             $("#sdesc").focus().after("<span class='error' style='color: #ff0000'>Name must be 2 to 30 letters</span>");
             return false;
-        }
+        }*/
         //Date Start
-        else if ($("#date_start").val() == "" || $("#date_start").val() == "Introduce date of birth") {
+        if ($("#date_start").val() == "" || $("#date_start").val() == "Introduce date of birth") {
             $("#date_start").focus().after("<span class='error' style='color: #ff0000'>Introduce date of birth</span>");
             return false;
         } else if (!date_reg.test($("#date_start").val())) {
@@ -323,109 +339,59 @@ function validate_rooms(){
         }
 
 
-
-
-
     //Si ha ido todo bien, se envian los datos al servidor
     if (result) {
         var data = {"sdesc": sdesc, "maxguest": maxguest, "numbrooms": numbrooms, "date_start": date_start, "numbbeds": numbbeds, "numbbaths": numbbaths, "end_date": end_date, "dayprice": dayprice, "weeklyprice": weeklyprice,
             "name": name, "email": email, "country": country, "components": components, "services": services };
             
         var data_users_JSON = JSON.stringify(data);
-        
+        console.log("Stringfy"+data_users_JSON);
 
 
         $.post('modules/rooms/controller/controller_rooms.class.php', 
             {alta_rooms_json: data_users_JSON},
+
         function (response) {
-            alert("aaa");
-            if (response.success) {
-                window.location.href = response.redirect;
-            }
-            //alert(response);  //para debuguear
-            //}); //para debuguear
-        //}, "json").fail(function (xhr) {
+            window.location.href = response.redirect;
+            console.log("1 "+response);
+
+            console.log("1 "+response.success);
+            console.log("1 "+response.redirect);
+
+
+    }, "json").fail(function(xhr, status, error) {
+
+        console.log(xhr.responseText);
+        console.log("2 "+xhr.responseText.success);
+        console.log("2 "+xhr.responseText.redirect);
+            //console.log(xhr.responseText);
+            //console.log(xhr.responseJSON);
+
+        if (xhr.responseJSON.error.sdesc)
+                $("#sdesc").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.sdesc + "</span>");
+
+        if (xhr.responseJSON.error.maxguest)
+                $("#maxguest").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.maxguest + "</span>");
+
+        });
+
+
+           // }); //para debuguear
+           
+           /*
         
         }, "json").fail(function(xhr, status, error) {
-            console.log(xhr.responseText);
-            console.log(xhr.responseJSON);
+
+ console.log("2 "+xhr.responseText);
+            //console.log(xhr.responseText);
+            //console.log(xhr.responseJSON);
             
             
-            if (xhr.responseJSON.error.sdesc)
-                $("#sdesc").focus().after("<span  class='error1'>" + xhr.responseJSON.error.sdesc + "</span>");
-            
-
-            if (xhr.responseJSON.error.maxguest)
-                $("#maxguest").focus().after("<span  class='error1'>" + xhr.responseJSON.error.maxguest + "</span>");
-            
-
-            if (xhr.responseJSON.error.numbrooms)
-                $("#numbrooms").focus().after("<span  class='error1'>" + xhr.responseJSON.error.numbrooms + "</span>");
-            
-
-            if (xhr.responseJSON.error.date_start)
-                $("#date_start").focus().after("<span  class='error1'>" + xhr.responseJSON.error.date_start + "</span>");
-            
-
-            if (xhr.responseJSON.error.numbbeds)
-                $("#numbbeds").focus().after("<span  class='error1'>" + xhr.responseJSON.error.numbbeds + "</span>");
-            
-
-            if (xhr.responseJSON.error.numbbaths)
-                $("#numbbaths").focus().after("<span  class='error1'>" + xhr.responseJSON.error.numbbaths + "</span>");
-            
-
-            if (xhr.responseJSON.error.end_date)
-                $("#end_date").focus().after("<span  class='error1'>" + xhr.responseJSON.error.end_date + "</span>");
-            
-
-            if (xhr.responseJSON.error.dayprice)
-                $("#dayprice").focus().after("<span  class='error1'>" + xhr.responseJSON.error.dayprice + "</span>");
-            
-
-            if (xhr.responseJSON.error.weeklyprice)
-                $("#weeklyprice").focus().after("<span  class='error1'>" + xhr.responseJSON.error.weeklyprice + "</span>");
-            
-
-            if (xhr.responseJSON.error.components)
-                $("#components").focus().after("<span class='error1'>" + xhr.responseJSON.error.components + "</span>");
-            
-
-            if (xhr.responseJSON.error.services)
-                $("#services").focus().after("<span  class='error1'>" + xhr.responseJSON.error.services + "</span>");
-            
-
-            if (xhr.responseJSON.error.name)
-                $("#name").focus().after("<span  class='error1'>" + xhr.responseJSON.error.name + "</span>");
-            
-
-            if (xhr.responseJSON.error.email)
-                $("#email").focus().after("<span  class='error1'>" + xhr.responseJSON.error.email + "</span>");
-            
-
-            if (xhr.responseJSON.error.country)
-                $("#country").focus().after("<span  class='error1'>" + xhr.responseJSON.error.country + "</span>");
-            
-
-            if (xhr.responseJSON.error_avatar)
-                $("#dropzone").focus().after("<span  class='error1'>" + xhr.responseJSON.error_avatar + "</span>");
-
-            if (xhr.responseJSON.success1) {
-                if (xhr.responseJSON.img_avatar !== "/3_fileupload_dropzone/media/default-avatar.png") {
-                    //$("#progress").show();
-                    //$("#bar").width('100%');
-                    //$("#percent").html('100%');
-                    //$('.msg').text('').removeClass('msg_error');
-                    //$('.msg').text('Success Upload image!!').addClass('msg_ok').animate({ 'right' : '300px' }, 300);
-                }
-            } else {
-                $("#progress").hide();
-                $('.msg').text('').removeClass('msg_ok');
-                $('.msg').text('Error Upload image!!').addClass('msg_error').animate({'right': '300px'}, 300);
-            }
-
+           
             
         });
+
+        */
     }
     
 
