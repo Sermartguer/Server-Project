@@ -238,7 +238,6 @@ $(document).ready(function () {
 
 function validate_rooms(){
     var result = true;
-   var result = true;
 
     var sdesc = document.getElementById('sdesc').value;
     var maxguest = document.getElementById('maxguest').value;
@@ -335,9 +334,10 @@ function validate_rooms(){
             "name": name, "email": email, "country": country, "components" : components, "services": services};
             
         var data_users_JSON = JSON.stringify(data);
-
+        console.log(data_users_JSON);
         $.post('/Server-Project/modules/rooms/controller/controller_rooms.class.php',
                 {alta_users_json: data_users_JSON},
+
         function (response) {
             if (response.success) {
                 window.location.href = response.redirect;

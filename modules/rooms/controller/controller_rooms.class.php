@@ -14,6 +14,7 @@
 
 		//////////////////////////////////////////////////////////////// alta_users_json
 		if ((isset($_POST['alta_users_json']))) {
+			echo "<script type='text/javascript'>alert('Hello');</script>";
 		    alta_users();
 		}
 
@@ -91,9 +92,9 @@
 //////////////////////////////////////////////////////////////// load
 if (isset($_GET["load"]) && $_GET["load"] == true) {
     $jsondata = array();
-    if (isset($_SESSION['user'])) {
+    if (isset($_SESSION['rooms'])) {
         //echo debug($_SESSION['user']);
-        $jsondata["user"] = $_SESSION['user'];
+        $jsondata["user"] = $_SESSION['rooms'];
     }
     if (isset($_SESSION['msje'])) {
         //echo $_SESSION['msje'];
@@ -105,7 +106,7 @@ if (isset($_GET["load"]) && $_GET["load"] == true) {
 }
 
 function close_session() {
-    unset($_SESSION['user']);
+    unset($_SESSION['rooms']);
     unset($_SESSION['msje']);
     $_SESSION = array(); // Destruye todas las variables de la sesión
     session_destroy(); // Destruye la sesión
@@ -114,32 +115,18 @@ function close_session() {
 /////////////////////////////////////////////////// load_data
 if ((isset($_GET["load_data"])) && ($_GET["load_data"] == true)) {
     $jsondata = array();
-    if (isset($_SESSION['user'])) {
-        $jsondata["user"] = $_SESSION['user'];
+    if (isset($_SESSION['rooms'])) {
+        $jsondata["rooms"] = $_SESSION['rooms'];
         echo json_encode($jsondata);
         exit;
     } else {
-        $jsondata["user"] = "";
+        $jsondata["rooms"] = "";
         echo json_encode($jsondata);
         exit;
     }
 	}
 	
 	//include 'modules/rooms/view/create_rooms.php';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	/*if (isset($_POST['SubmitRooms'])) {
 		$_SESSION=$_POST;
