@@ -106,7 +106,7 @@ function validate_user($value) {
     if ($resultado != null && $resultado) {
 
 
-        if ($resultado['sdesc']) {
+        if (!$resultado['sdesc']) {
             $error['sdesc'] = 'Name must be 2 to 20 letters';
             $valido = false;
         }

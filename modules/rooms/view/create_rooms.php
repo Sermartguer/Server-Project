@@ -67,7 +67,7 @@
                             <i class="" src="../../../view/img/open-exit-door.svg" aria-hidden="true"></i>
                             <label for="exampleFormControlSelect1">Rooms</label>
                             <select class="form-control" id="numbrooms" name="numbrooms">
-                                <option value="Select One">Select One</option>
+                                <!--<option value="Select One">Select One</option>-->
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -75,7 +75,11 @@
                                 <option value="5">5</option>
                                 <option value="6">6</option>
                             </select>
-                            <div id="numbrooms"></div>
+                            <div id="numbrooms"><?php
+                                if (isset($error['numbrooms'])) {
+                                    print ("<BR><span style='color: #ff0000'>" . "* " . $error['numbrooms'] . "</span><br/>");
+                                }
+                            ?></div>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -321,7 +325,11 @@
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                         <div class="form-group">
                                         <label>Name*</label>
-                                        <input type="text" name="name" id="name" placeholder="name" class="form-control" value="sergio" >
+                                        <input type="text" name="name" id="name" placeholder="name" class="form-control" value="<?php
+                                            if (!isset($error['name'])) {
+                                                echo $_POST ? $_POST['name'] : "";
+                                            }
+                                            ?>" >
                                             <div id="e_name"><?php
                                                 if (isset($error['name'])) {
                                                     print("<BR><span style='color: #ff0000'>" . "* " . $error['name'] . "</span><br/>");
@@ -333,7 +341,11 @@
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                         <div class="form-group">
                                         <label>E-mail *</label>
-                                        <input type="email" id="email" name="email" placeholder="email" class="form-control"  value="sermarguerytb@gmail.com">
+                                        <input type="email" id="email" name="email" placeholder="email" class="form-control"  value="<?php
+                                            if (!isset($error['email'])) {
+                                                echo $_POST ? $_POST['email'] : "";
+                                            }
+                                            ?>">
                                                                     <div id="e_email"><?php
                                             if (isset($error['email'])) {
                                                 print("<BR><span style='color: #ff0000'>" . "* " . $error['email'] . "</span><br/>");
