@@ -1,9 +1,12 @@
 <?php
 	session_start();
+
 	include ($_SERVER['DOCUMENT_ROOT'] . "/Server-Project/modules/rooms/utils/functions_rooms.inc.php");
 	include ($_SERVER['DOCUMENT_ROOT'] . "/Server-Project/utils/upload.php");
 
-	echo "<br>";echo "<br>";
+	echo "<br>";
+
+	echo "<br>";
 	
 	//////////////////////////////////////////////////////////////// upload
 		if ((isset($_GET["upload"])) && ($_GET["upload"] == true)) {
@@ -13,8 +16,8 @@
 		}
 
 		//////////////////////////////////////////////////////////////// alta_users_json
-		if ((isset($_POST['alta_users_json']))) {
-			echo "<script type='text/javascript'>alert('Hello');</script>";
+		if ((isset($_POST['alta_rooms_json']))) {
+			console.log("aaaa");
 		    alta_users();
 		}
 
@@ -24,7 +27,7 @@
 
 	
 	function alta_users() {
-		
+		console.log("asdadas");
 		$jsondata = array();
 	    $usersJSON = json_decode($_POST["alta_users_json"], true);
 	    $result = validate_user($usersJSON);
