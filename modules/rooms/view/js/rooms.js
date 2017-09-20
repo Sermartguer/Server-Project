@@ -60,7 +60,7 @@ jQuery.fn.fill_or_clean = function () {
                 $("#name").attr("value", "Introduce last name");
             }
         });
-       
+
        //Email
         if ($("#email").attr("value") == "") {
             $("#email").attr("value", "Introduce email");
@@ -75,7 +75,7 @@ jQuery.fn.fill_or_clean = function () {
                 $("#email").attr("value", "Introduce email");
             }
         });
-            
+
     });//each
     return this;
 };//function
@@ -90,7 +90,7 @@ $(document).ready(function () {
         validate_rooms();
     });
 //Control de seguridad para evitar que al volver atrás de la pantalla results a create, no nos imprima los datos
-   
+
    /* $.get("/Server-Project/modules/rooms/controller/controller_rooms.class.php?load_data=true",
             function (response) {
                 //alert(response.user);
@@ -135,7 +135,7 @@ $(document).ready(function () {
                     $("#weeklyprice").val(response.rooms.weeklyprice);
                     $("#country").val(response.rooms.country);
 
-                    
+
                     var inputcompo = response.rooms.inputcompo;
                      var inputservices = document.getElementsByClassName('msjservices');
                     var inputElements = document.getElementsByClassName('msjcompo');
@@ -216,7 +216,7 @@ $(document).ready(function () {
     });
 
 
-   
+
 
     var email_reg = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
     var date_reg = /^(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d$/;
@@ -225,7 +225,7 @@ $(document).ready(function () {
     var string_reg = /^[A-Za-z]{2,30}$/;
     var usr_reg = /^[0-9a-zA-Z]{2,20}$/;
 
-    
+
     //realizamos funciones para que sea más práctico nuestro formulario
         $("#sdesc, #name").keyup(function () {
             if ($(this).val() != "" && string_reg.test($(this).val())) {
@@ -254,7 +254,7 @@ $(document).ready(function () {
 function validate_rooms(){
     var result = true;
 
-    //var sdesc = document.getElementById('sdesc').value;
+    var sdesc = document.getElementById('sdesc').value;
     var maxguest = document.getElementById('maxguest').value;
     var numbrooms = document.getElementById('numbrooms').value;
     var date_start = document.getElementById('date_start').value;
@@ -305,7 +305,7 @@ function validate_rooms(){
             return false;
         }
         //Date Start
-        else if ($("#date_start").val() == "" || $("#date_start").val() == "Introduce date of birth") {
+       if ($("#date_start").val() == "" || $("#date_start").val() == "Introduce date of birth") {
             $("#date_start").focus().after("<span class='error' style='color: #ff0000'>Introduce date of birth</span>");
             return false;
         } else if (!date_reg.test($("#date_start").val())) {
@@ -314,7 +314,7 @@ function validate_rooms(){
         }
 
         //Date End
-        else if ($("#end_date").val() == "" || $("#end_date").val() == "Introduce date of title") {
+         if ($("#end_date").val() == "" || $("#end_date").val() == "Introduce date of title") {
             $("#end_date").focus().after("<span class='error' style='color: #ff0000'>Introduce date of title</span>");
             return false;
         } else if (!date_reg.test($("#end_date").val())) {
@@ -323,14 +323,14 @@ function validate_rooms(){
         }
 
         //Name
-        else if ($("#name").val() == "" || $("#name").val() == "Introduce last name") {
+         if ($("#name").val() == "" || $("#name").val() == "Introduce last name") {
             $("#name").focus().after("<span class='error' style='color: #ff0000'>Introduce last name</span>");
             return false;
         } else if (!string_reg.test($("#name").val())) {
             $("#name").focus().after("<span class='error' style='color: #ff0000'>Last name must be 2 to 30 letters</span>");
             return false;
         }
-        
+
         //Email
         if ($("#email").val() == "" || $("#email").val() == "Introduce email") {
             $("#email").focus().after("<span class='error' style='color: #ff0000'>Introduce email</span>");
@@ -343,14 +343,15 @@ function validate_rooms(){
 
     //Si ha ido todo bien, se envian los datos al servidor
     if (result) {
+      alert("sdesc"+sdesc);
         var data = {"sdesc": sdesc, "maxguest": maxguest, "numbrooms": numbrooms, "date_start": date_start, "numbbeds": numbbeds, "numbbaths": numbbaths, "end_date": end_date, "dayprice": dayprice, "weeklyprice": weeklyprice,
             "name": name, "email": email, "country": country, "components": components, "services": services };
-            
+
         var data_users_JSON = JSON.stringify(data);
         console.log("Stringfy"+data_users_JSON);
 
 
-        $.post('modules/rooms/controller/controller_rooms.class.php', 
+        $.post('modules/rooms/controller/controller_rooms.class.php',
             {alta_rooms_json: data_users_JSON},
 
         function (response) {
@@ -369,35 +370,72 @@ function validate_rooms(){
             //console.log(xhr.responseText);
             //console.log(xhr.responseJSON);
 
-        
+         if (xhr.responseJSON.error.sdesc)
+              $("#sdesc").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.sdesc + "</span>");
 
-        if (xhr.responseJSON.error.maxguest)
-                $("#maxguest").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.maxguest + "</span>");
+         if (xhr.responseJSON.error.maxguest)
+              $("#maxguest").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.maxguest + "</span>");
 
-        if (xhr.responseJSON.error.numbrooms)
-                $("#numbrooms").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.numbrooms + "</span>");
+         if (xhr.responseJSON.error.numbrooms)
+              $("#numbrooms").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.numbrooms + "</span>");
+
+        if (xhr.responseJSON.error.numbbeds)
+              $("#numbbeds").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.numbbeds + "</span>");
+
+        if (xhr.responseJSON.error.numbbaths)
+              $("#numbbaths").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.numbbaths + "</span>");
+
+        if (xhr.responseJSON.error.dayprice)
+              $("#dayprice").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.dayprice + "</span>");
+
+        if (xhr.responseJSON.error.weeklyprice)
+              $("#weeklyprice").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.weeklyprice + "</span>");
+
+        if (xhr.responseJSON.error.date_start)
+            $("#date_start").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.date_start + "</span>");
+
+        if (xhr.responseJSON.error.end_date)
+            $("#end_date").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.end_date + "</span>");
+
+
+        if (xhr.responseJSON.error.components)
+            $("#components").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.components + "</span>");
+
+        if (xhr.responseJSON.error.services)
+            $("#services").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.services + "</span>");
+
+        if (xhr.responseJSON.error.name)
+            $("#name").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.name + "</span>");
+
+        if (xhr.responseJSON.error.email)
+            $("#email").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.email + "</span>");
+
+        if (xhr.responseJSON.error.country)
+            $("#country").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.country + "</span>");
+
+
 
         });
 
 
            // }); //para debuguear
-           
+
            /*
-        
+
         }, "json").fail(function(xhr, status, error) {
 
  console.log("2 "+xhr.responseText);
             //console.log(xhr.responseText);
             //console.log(xhr.responseJSON);
-            
-            
-           
-            
+
+
+
+
         });
 
         */
     }
-    
+
 
 
 }
@@ -424,10 +462,6 @@ function validate_rooms(){
             }*/
 
 
-        
+
         /*$("#form_rooms").submit();
         $("#form_rooms").attr("action", "index.php?module=rooms");*/
-
-  
-
-    

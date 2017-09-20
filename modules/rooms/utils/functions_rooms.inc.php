@@ -4,8 +4,8 @@ function validate_user($value) {
     $valido = true;
     $filtro = array(
         'sdesc' => array(
-            'filter' => FILTER_VALIDATE_REGEXP,
-            'options' => array('regexp' => '/^\D{2,30}$/')
+           'filter' => FILTER_VALIDATE_REGEXP,
+           'options' => array('regexp' => '/^[A-Za-z]{2,30}$/')
         ),
         'name' => array(
             'filter' => FILTER_VALIDATE_REGEXP,
@@ -19,16 +19,16 @@ function validate_user($value) {
             'filter' => FILTER_VALIDATE_REGEXP,
             'options' => array('regexp' => '/(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d/')
         ),
-        
+
         'email' => array(
             'filter' => FILTER_CALLBACK,
             'options' => 'valida_email'
         ),
     );
-    
+
 
     $resultado = filter_var_array($value, $filtro);
-    
+
     //no filter
     $resultado['maxguest'] = $value['maxguest'];
     $resultado['numbrooms'] = $value['numbrooms'];
@@ -87,31 +87,32 @@ function validate_user($value) {
         $valido = false;
     }
     if($resultado['country'] === 'Select One'){
-        $error['country'] = "You haven't select the weekly price";
+        $error['country'] = "You haven't select the county";
         $valido = false;
     }
 
     if(count($resultado['components']) <=1){
-        
-         
+
+
         $error['components'] = "Select 1 or more.";
         $valido = false;
     }
     if(count($resultado['services']) <=1){
-       
+
         $error['services'] = "Select 1 or more.";
         $valido = false;
     }
 
+
     if ($resultado != null && $resultado) {
 
 
-        if ($resultado['sdesc']) {
+        if (!$resultado['sdesc']) {
             $error['sdesc'] = 'Name must be 2 to 20 letters';
             $valido = false;
         }
 
-        
+
 
         if (!$resultado['email']) {
             $error['email'] = 'error format email (example@example.com)';
@@ -119,7 +120,7 @@ function validate_user($value) {
         }
 
 
-        
+
 
         if (!$resultado['name']) {
             $error['name'] = 'Name must be 2 to 30 letters';
@@ -129,7 +130,7 @@ function validate_user($value) {
         if (!$resultado['date_start']) {
             if($resultado['date_start'] == ""){
                 $error['date_start'] = "this camp can't empty";
-                $valido = false;  
+                $valido = false;
             }else{
                 $error['date_start'] = 'error format date (mm/dd/yyyy)';
                 $valido = false;
@@ -139,7 +140,7 @@ function validate_user($value) {
         if (!$resultado['end_date']) {
             if($resultado['end_date'] == ""){
                 $error['end_date'] = "this camp can't empty";
-                $valido = false;  
+                $valido = false;
             }else{
             $error['end_date'] = 'error format date (mm/dd/yyyy)';
             $valido = false;
@@ -148,7 +149,7 @@ function validate_user($value) {
     } else {
         $valido = false;
     };
-    
+
     return $return = array('resultado' => $valido, 'error' => $error, 'datos' => $resultado);
 }
 

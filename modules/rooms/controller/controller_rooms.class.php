@@ -7,7 +7,7 @@
 	//echo "<br>";
 
 	//echo "<br>";
-	
+
 	//////////////////////////////////////////////////////////////// upload
 		if ((isset($_GET["upload"])) && ($_GET["upload"] == true)) {
 		  $result_avatar = upload_files();
@@ -17,15 +17,14 @@
 
 		//////////////////////////////////////////////////////////////// alta_users_json
 		if ((isset($_POST['alta_rooms_json']))) {
-		    
 		    alta_users();
 		}
 
 
 	//include 'modules/rooms/utils/functions_rooms.inc.php';
-	
 
-	
+
+
 	function alta_users() {
 
 		/*echo json_encode("pepe");
@@ -51,18 +50,18 @@
 	        echo json_encode($jsondata);
 	        die();*/
 
-		
-		$jsondata = array();
+
+			$jsondata = array();
 	    $usersJSON = json_decode($_POST["alta_rooms_json"], true);
 	    $result = validate_user($usersJSON);
-		
+			
 	    if (empty($_SESSION['result_avatar'])) {
         	$_SESSION['result_avatar'] = array('resultado' => true, 'error' => "", 'datos' => 'media/default-avatar.png');
     	}
     	$result_avatar = $_SESSION['result_avatar'];
-    	
+
 		if (($result['resultado']) && ($result_avatar['resultado'])) {
-			
+
 			$arrArgument = array(
 				'sdesc' => ucfirst($result['datos']['sdesc']),
 				'maxguest' => strtoupper($result['datos']['maxguest']),
@@ -80,14 +79,14 @@
 				'country' => $result['datos']['country'],
 				'avatar' => $result_avatar['datos']
 
-				
+
 			);
-	
+
 			$mensaje = "User has been successfully registered";
-	
+
 			$_SESSION['rooms'] = $arrArgument;
 			$_SESSION['msje'] = $mensaje;
-	
+
 			$callback = "index.php?module=rooms&view=results_rooms";
 			$jsondata["success"] = true;
 	        $jsondata["redirect"] = $callback;

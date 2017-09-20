@@ -18,8 +18,13 @@
                     <div class="col-12">
                         <div class="form-group ">
                             <label>Sort description *</label>
-                            <input type="text" name="sdesc" id="sdesc" placeholder="Sort Description" class="form-control" value="" required="required">
-                                <div id="e_sdesc"></div>
+                            <input type="text" name="sdesc" id="sdesc" placeholder="Sort Description" class="form-control" value="asdsadas" required="required">
+                                <div id="e_sdesc"><?php
+                                    if (isset($error['sdesc'])) {
+                                        print("<BR><span style='color: #ff0000'>" . "* " . $error['sdesc'] . "</span><br/>");
+                                    }
+                                    ?>
+                                </div>
                             <small  class="form-text text-muted">Please, not enter more than 8 words.</small>
                         </div>
                     </div>
@@ -33,7 +38,7 @@
                     </div>
                     <div class="col-6 col-sm-12 col-xl-6">
                         <h3>Disponibilidad de MyRoom</h3>
-                        <small id="sdesc" class="form-text text-muted">Please, minimum 1 day</small>
+                        <small id="a" class="form-text text-muted">Please, minimum 1 day</small>
                     </div>
                 </div>
 
@@ -46,7 +51,7 @@
                             <i class="fa fa-users" aria-hidden="true"></i>
                             <label for="exampleFormControlSelect1">Maximum guests</label>
                             <select class="form-control" id="maxguest" name="maxguest">
-                                <option value="Select One">Select One</option>
+                                <!--<option value="Select One">Select One</option>-->
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -67,7 +72,7 @@
                             <i class="" src="../../../view/img/open-exit-door.svg" aria-hidden="true"></i>
                             <label for="exampleFormControlSelect1">Rooms</label>
                             <select class="form-control" id="numbrooms" name="numbrooms">
-                                <option value="Select One">Select One</option>
+                                <!--<option value="Select One">Select One</option>-->
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -81,7 +86,7 @@
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="form-group">
                             <label>Date of start *</label><br />
-                            <input  id="date_start" type="text" name="date_start"   class="form-control" placeholder="mm/dd/yyyy"  value="09/29/2017">
+                            <input  id="date_start" type="text" name="date_start"   class="form-control" placeholder="mm/dd/yyyy"  value="09/20/2017">
                                 <div id="date_start"><?php
                                 if (isset($error['date_start'])) {
                                     print("<BR><span style='color: #ff0000'>" . "* " . $error['date_start'] . "</span><br/>");
@@ -162,7 +167,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
                             <div class="form-group">
-                            
+
                                 <label for="exampleFormControlSelect1">Day-Price</label>
                                 <select class="form-control" id="dayprice" name="dayprice">
                                     <!--<option value="Select One">Select One</option>-->
@@ -204,7 +209,7 @@
                                     <div class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-4">
                                         <label for="">
                                             <strong class="text-uppercase">First aid kit</strong>
-                                        </label> 
+                                        </label>
                                         <input type="checkbox" name="components[]" class="msjcompo" value="Botiquin" checked="checked">
                                     </div>
                                     <div class="col-6 col-sm-3 col-md-4 col-lg-3 col-xl-3">
@@ -255,23 +260,23 @@
                     <!--EndRow-->
 
                     <div class="row ">
-                        
+
                             <div class="col-6 col-sm-12 col-md-6 col-xl-6">
                                 <div class="form-group">
                                     <!--Row1-->
                                     <div class="row justify-content-md-center">
                                         <div class="col-4 col-sm-4 col-md-5 col-lg-4 col-xl-4">
                                             <input type="checkbox" name="services[]" class="msjservices" value="Cocina" checked="checked">
-                                            <label for=""><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Kitchen</strong></label>  
+                                            <label for=""><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Kitchen</strong></label>
                                         </div>
                                         <div class="col-4 col-sm-4 col-md-5 col-lg-4 col-xl-4">
-                                            <input type="checkbox" name="services[]" class="msjservices" value="Internet" checked="checked">
-                                            <label for=""><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Internet</strong></label> 
+                                            <input type="checkbox" name="services[]" class="msjservices" value="Internet" checked="checked" >
+                                            <label for=""><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Internet</strong></label>
                                         </div>
                                         <div class="col-3 col-sm-3 col-md-4 col-lg-3 col-xl-2">
                                             <input type="checkbox" name="services[]" class="msjservices" value="TV">
                                             <label for=""><i class="fa fa-television" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">TV</strong></label>
-                                        </div>  
+                                        </div>
 
                                         <div class="col-4 col-sm-4 col-md-5 col-lg-4 col-xl-4">
                                             <input type="checkbox" name="services[]" class="msjservices" value="Calefaccion">
@@ -280,39 +285,39 @@
                                         <div class="col-5 col-sm-5 col-md-8 col-lg-6 col-xl-5">
                                             <input type="checkbox" name="services[]" class="msjservices" value="Aire Acondicionado">
                                             <label for=""><i class="fa fa-snowflake-o" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Air conditioner</strong></label>
-                                        </div> 
+                                        </div>
 
                                         <div class="col-3 col-sm-3 col-md-4 col-lg-3 col-xl-3">
                                                 <input type="checkbox" name="services[]" class="msjservices" value="Mascotas">
-                                                <label for=""><i class="fa fa-paw" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Pets</strong></label> 
+                                                <label for=""><i class="fa fa-paw" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Pets</strong></label>
                                         </div>
-                                        
+
                                         <div class="col-5 col-sm-5 col-md-6 col-lg-5 col-xl-4">
                                             <input type="checkbox" name="services[]" class="msjservices" value="Elementos Basicos">
-                                            <label for=""><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Core items</strong></label> 
+                                            <label for=""><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;<strong class="text-uppercase">Core items</strong></label>
                                         </div>
 
                                         <div class="col-6 col-sm-6 col-md-9 col-lg-7 col-xl-6">
                                             <input type="checkbox" name="services[]" class="msjservices" value="FreeAparcamiento">
-                                            <label for=""><i class="fa fa-car" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<strong class="text-uppercase">Free on-site parking</strong></label> 
+                                            <label for=""><i class="fa fa-car" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<strong class="text-uppercase">Free on-site parking</strong></label>
                                         </div>
 
                                         <div class="col-5 col-sm-5 col-md-8 col-lg-6 col-xl-5">
                                             <input type="checkbox" name="services[]" class="msjservices" value="Rutas proximas">
-                                            <label for=""><i class="fa fa-bicycle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<strong class="text-uppercase">Nearby Routes</strong></label> 
+                                            <label for=""><i class="fa fa-bicycle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<strong class="text-uppercase">Nearby Routes</strong></label>
                                         </div>
                                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                             <input type="checkbox" name="services[]" class="msjservices" value="Rutas proximas" style="display: none" checked>
-                                            <label for="" style="display: none"><i class="fa fa-bicycle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<strong class="text-uppercase" style="display: none"></strong></label> 
+                                            <label for="" style="display: none"><i class="fa fa-bicycle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<strong class="text-uppercase" style="display: none"></strong></label>
                                         </div>
-                                        
-                                    </div>  
+
+                                    </div>
                                     <div id="services"><?php
                                     if (isset($error['services'])) {
                                         print ("<BR><span style='color: #ff0000'>" . "* " . $error['services'] . "</span><br/>");
                                     }
                                 ?></div>
-                                </div><!--EndForm-Group-->   
+                                </div><!--EndForm-Group-->
                             </div><!--End DivCol-6-->
 
                             <div class="col-6 col-sm-12 col-md-6 col-xl-6">
@@ -333,7 +338,7 @@
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                         <div class="form-group">
                                         <label>E-mail *</label>
-                                        <input type="email" id="email" name="email" placeholder="email" class="form-control"  value="sermarguerytb@gmail.com">
+                                        <input type="email" id="email" name="email" placeholder="email" class="form-control"  value="sergiete103@gmail.com">
                                                                     <div id="e_email"><?php
                                             if (isset($error['email'])) {
                                                 print("<BR><span style='color: #ff0000'>" . "* " . $error['email'] . "</span><br/>");
@@ -354,7 +359,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <select class="form-control" name="country" id="country">
-                                                <!--<option value="Select One">Select One</option>-->
+                                              <!--<option value="Select One">Select One</option>-->
                                                 <option value="AFG">Afghanistan</option>
                                                 <option value="ALA">Åland Islands</option>
                                                 <option value="ALB">Albania</option>
@@ -609,7 +614,7 @@
                                                 if (isset($error['country'])) {
                                                     print ("<BR><span style='color: #ff0000'>" . "* " . $error['country'] . "</span><br/>");
                                                 }
-                                                ?> 
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
