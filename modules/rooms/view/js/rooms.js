@@ -158,7 +158,7 @@ $(document).ready(function () {
 
                 //Dropzone function //////////////////////////////////
     $("#dropzone").dropzone({
-        url: "/Server-Project/modules/rooms/controller/controller_rooms.class.php?upload=true",
+        url: "modules/rooms/controller/controller_rooms.class.php?upload=true",
         addRemoveLinks: true,
         maxFileSize: 1000,
         dictResponseError: "Ha ocurrido un error en el server",
@@ -185,7 +185,7 @@ $(document).ready(function () {
             var name = file.name;
             $.ajax({
                 type: "POST",
-                url: "/Server-Project/modules/rooms/controller/controller_rooms.class.php?delete=true",
+                url: "modules/rooms/controller/controller_rooms.class.php?delete=true",
                 data: "filename=" + name,
                 success: function (data) {
                     $("#progress").hide();
@@ -413,7 +413,23 @@ function validate_rooms(){
         if (xhr.responseJSON.error.country)
             $("#country").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.country + "</span>");
 
+        if (xhr.responseJSON.error_avatar)
+            $("#dropzone").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error_avatar + "</span>");
 
+
+            if (xhr.responseJSON.success1) {
+                    if (xhr.responseJSON.img_avatar !== "/media/default-avatar.png") {
+                        //$("#progress").show();
+                        //$("#bar").width('100%');
+                        //$("#percent").html('100%');
+                        //$('.msg').text('').removeClass('msg_error');
+                        //$('.msg').text('Success Upload image!!').addClass('msg_ok').animate({ 'right' : '300px' }, 300);
+                    }
+                } else {
+                    $("#progress").hide();
+                    $('.msg').text('').removeClass('msg_ok');
+                    $('.msg').text('Error Upload image!!').addClass('msg_error').animate({'right': '300px'}, 300);
+                }
 
         });
 
