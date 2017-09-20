@@ -51,7 +51,7 @@
                             <i class="fa fa-users" aria-hidden="true"></i>
                             <label for="exampleFormControlSelect1">Maximum guests</label>
                             <select class="form-control" id="maxguest" name="maxguest">
-                                <!--<option value="Select One">Select One</option>-->
+                                <option value="Select One">Select One</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -72,7 +72,7 @@
                             <i class="" src="../../../view/img/open-exit-door.svg" aria-hidden="true"></i>
                             <label for="exampleFormControlSelect1">Rooms</label>
                             <select class="form-control" id="numbrooms" name="numbrooms">
-                                <!--<option value="Select One">Select One</option>-->
+                              <option value="Select One">Select One</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -86,8 +86,8 @@
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="form-group">
                             <label>Date of start *</label><br />
-                            <input  id="date_start" type="text" name="date_start"   class="form-control" placeholder="mm/dd/yyyy"  value="09/20/2017">
-                                <div id="date_start"><?php
+                            <input  id="date_start" type="text" name="date_start"   class="form-control" placeholder="mm/dd/yyyy"  value="09/20/2017" readonly>
+                                <div id="date_start" ><?php
                                 if (isset($error['date_start'])) {
                                     print("<BR><span style='color: #ff0000'>" . "* " . $error['date_start'] . "</span><br/>");
                                 }
@@ -105,7 +105,7 @@
                             <i class="fa fa-bed" aria-hidden="true"></i>
                             <label for="exampleFormControlSelect1">Beds</label>
                             <select class="form-control" id="numbbeds" name="numbbeds">
-                                <!--<option value="Select One">Select One</option>-->
+                                <option value="Select One">Select One</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -126,7 +126,7 @@
                             <i class="fa fa-shower" aria-hidden="true"></i>
                             <label for="exampleFormControlSelect1">Bath</label>
                             <select class="form-control" id="numbbaths" name="numbbaths">
-                                <!--<option value="Select One">Select One</option>-->
+                              <option value="Select One">Select One</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -141,7 +141,7 @@
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="form-group">
                             <label>Date of end *</label><br />
-                            <input id="end_date" type="text" name="end_date" placeholder="mm/dd/yyyy"  class="form-control"  value="09/30/2017">
+                            <input id="end_date" type="text" name="end_date" placeholder="mm/dd/yyyy"  class="form-control"  value="09/30/2017" readonly>
                                                         <div id="end_date"><?php
                                 if (isset($error['end_date'])) {
                                     print("<BR><span style='color: #ff0000'>" . "* " . $error['end_date'] . "</span><br/>");
@@ -170,7 +170,7 @@
 
                                 <label for="exampleFormControlSelect1">Day-Price</label>
                                 <select class="form-control" id="dayprice" name="dayprice">
-                                    <!--<option value="Select One">Select One</option>-->
+                                    <option value="Select One">Select One</option>
                                     <option value="10">10</option>
                                     <option value="20">20</option>
                                     <option value="30">30</option>
@@ -188,7 +188,7 @@
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Weekly-Price</label>
                                 <select class="form-control" id="weeklyprice" name="weeklyprice">
-                                    <!--<option value="Select One">Select One</option>-->
+                                    <option value="Select One">Select One</option>
                                     <option value="100">100</option>
                                     <option value="120">120</option>
                                     <option value="130">130</option>
@@ -229,6 +229,12 @@
                                             <strong class="text-uppercase">Security File</strong>
                                         </label>
                                            <input type="checkbox" name="components[]" class="msjcompo" value="Ficha de instrucciones de seguridad">
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                        <label for="">
+                                            <strong class="text-uppercase" style="display: none">Security File</strong>
+                                        </label>
+                                           <input type="checkbox" name="components[]" class="msjcompo" value="Ficha de instrucciones de seguridad" style="display: none" checked>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                         <label for="">
@@ -310,6 +316,10 @@
                                             <input type="checkbox" name="services[]" class="msjservices" value="Rutas proximas" style="display: none" checked>
                                             <label for="" style="display: none"><i class="fa fa-bicycle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<strong class="text-uppercase" style="display: none"></strong></label>
                                         </div>
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                            <input type="checkbox" name="services[]" class="msjservices" value="Rutas proximas" style="display: none" checked>
+                                            <label for="" style="display: none"><i class="fa fa-bicycle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<strong class="text-uppercase" style="display: none"></strong></label>
+                                        </div>
 
                                     </div>
                                     <div id="services"><?php
@@ -359,7 +369,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <select class="form-control" name="country" id="country">
-                                              <!--<option value="Select One">Select One</option>-->
+                                              <option value="Select One">Select One</option>
                                                 <option value="AFG">Afghanistan</option>
                                                 <option value="ALA">Åland Islands</option>
                                                 <option value="ALB">Albania</option>

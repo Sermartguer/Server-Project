@@ -91,10 +91,10 @@ $(document).ready(function () {
     });
 //Control de seguridad para evitar que al volver atrás de la pantalla results a create, no nos imprima los datos
 
-   /* $.get("/Server-Project/modules/rooms/controller/controller_rooms.class.php?load_data=true",
+    $.get("/Server-Project/modules/rooms/controller/controller_rooms.class.php?load_data=true",
             function (response) {
                 //alert(response.user);
-                if (response.user === "") {
+                if (response.rooms === "") {
                     $("#sdesc").val('');
                     $("#date_start").val('');
                     $("#end_date").val('');
@@ -109,6 +109,7 @@ $(document).ready(function () {
                     $("#country").val('Select One');
                     var inputcompo = document.getElementsByClassName('msjcompo');
                     var inputservices = document.getElementsByClassName('msjservices');
+
                     for (var i = 0; i < inputcompo.length; i++) {
                         if (inputcompo[i].checked) {
                             inputcompo[i].checked = false;
@@ -124,7 +125,7 @@ $(document).ready(function () {
                 } else {
                     $("#sdesc").val(response.rooms.sdesc);
                     $("#date_start").val(response.rooms.date_start);
-                    $("#end_date").val(response.rooms.date);
+                    $("#end_date").val(response.rooms.date_end);
                     $("#name").val(response.rooms.name);
                     $("#email").val( response.rooms.email);
                     $("#maxguest").val(response.rooms.maxguest);
@@ -134,27 +135,29 @@ $(document).ready(function () {
                     $("#dayprice").val(response.rooms.dayprice);
                     $("#weeklyprice").val(response.rooms.weeklyprice);
                     $("#country").val(response.rooms.country);
-
-
-                    var inputcompo = response.rooms.inputcompo;
-                     var inputservices = document.getElementsByClassName('msjservices');
+                    var components = response.rooms.components;
+                    var services = response.rooms.services;
                     var inputElements = document.getElementsByClassName('msjcompo');
-                    for (var i = 0; i < inputcompo.length; i++) {
-                        for (var j = 0; j < inputElements.length; j++) {
-                            if(inputcompo[i] ===inputElements[j] )
-                                inputElements[j].checked = true;
-                        }
-                    }
+                    var inputElementsservices = document.getElementsByClassName('msjservices');
+                    for (var i = 0; i < components.length; i++) {
+                       for (var j = 0; j < inputElements.length; j++) {
+                           if(components[i] ===inputElements[j] )
+                               inputElements[j].checked = true;
+                             }
+                     }
+                     for (var i = 0; i < services.length; i++) {
+                        for (var j = 0; j < inputElementsservices.length; j++) {
+                            if(services[i] ===inputElementsservices[j] )
+                                inputElementsservices[j].checked = true;
+                              }
+                      }
 
-                    for (var i = 0; i < inputservices.length; i++) {
-                        if (inputservices[i].checked) {
-                            inputservices[i].checked = false;
-                        }
-                    }
+
+
 
                 }
             }, "json");
-            */
+
 
                 //Dropzone function //////////////////////////////////
     $("#dropzone").dropzone({

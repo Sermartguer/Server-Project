@@ -91,13 +91,13 @@ function validate_user($value) {
         $valido = false;
     }
 
-    if(count($resultado['components']) <=1){
+    if(count($resultado['components']) <1){
 
 
         $error['components'] = "Select 1 or more.";
         $valido = false;
     }
-    if(count($resultado['services']) <=1){
+    if(count($resultado['services']) <1){
 
         $error['services'] = "Select 1 or more.";
         $valido = false;
