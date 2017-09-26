@@ -36,9 +36,13 @@ function validate_user($value) {
     $resultado['numbbaths'] = $value['numbbaths'];
     $resultado['dayprice'] = $value['dayprice'];
     $resultado['weeklyprice'] = $value['weeklyprice'];
-    $resultado['country'] = $value['country'];
+
     $resultado['services'] = $value['services'];
     $resultado['components'] = $value['components'];
+    $resultado['country'] = $value['country'];
+    $resultado['province'] = $value['province'];
+    $resultado['city'] = $value['city'];
+
 
     /*if ($resultado['date_start']) {
         //validate to user's over 16
@@ -86,17 +90,28 @@ function validate_user($value) {
         $error['weeklyprice'] = "You haven't select the weekly price";
         $valido = false;
     }
-    if($resultado['country'] === 'Select One'){
-        $error['country'] = "You haven't select the county";
-        $valido = false;
-    }
+    if ($resultado['country']==='Select country'){
+            $error['country']="You need to choose a country";
+            $valid = false;
+        }
+
+    if ($resultado['province']==='Select province'){
+            $error['province']="You need to choose a province";
+            $valid = false;
+        }
+
+    if ($resultado['city']==='Select city'){
+            $error['city']="You need to choose a city";
+            $valid = false;
+        }
 
     if(count($resultado['components']) <1){
-
-
         $error['components'] = "Select 1 or more.";
         $valido = false;
     }
+
+
+
     if(count($resultado['services']) <1){
 
         $error['services'] = "Select 1 or more.";

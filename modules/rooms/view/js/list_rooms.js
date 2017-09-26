@@ -114,7 +114,6 @@ function pintar_rooms(data) {
     parrafo.appendChild(name);
     parrafo.appendChild(email);
     parrafo.appendChild(country);
-
     parrafo.appendChild(components);
     parrafo.appendChild(services);
 

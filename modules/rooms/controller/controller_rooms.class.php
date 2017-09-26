@@ -1,9 +1,9 @@
 <?php
 	session_start();
 
-	include ($_SERVER['DOCUMENT_ROOT'] . "/Server-Project/modules/rooms/utils/functions_rooms.inc.php");
-	include ($_SERVER['DOCUMENT_ROOT'] . "/Server-Project/utils/upload.php");
-
+	include ($_SERVER['DOCUMENT_ROOT'] . "/a/Server-Project/modules/rooms/utils/functions_rooms.inc.php");
+	include ($_SERVER['DOCUMENT_ROOT'] . "/a/Server-Project/utils/upload.php");
+	include ($_SERVER['DOCUMENT_ROOT'] . "/a/Server-Project/utils/common.inc.php");
 	//echo "<br>";
 
 	//echo "<br>";
@@ -54,7 +54,7 @@
 			$jsondata = array();
 	    $usersJSON = json_decode($_POST["alta_rooms_json"], true);
 	    $result = validate_user($usersJSON);
-			
+
 	    if (empty($_SESSION['result_avatar'])) {
         	$_SESSION['result_avatar'] = array('resultado' => true, 'error' => "", 'datos' => 'media/default-avatar.png');
     	}
@@ -77,12 +77,29 @@
 				'name' => ucfirst($result['datos']['name']),
 				'email' => $result['datos']['email'],
 				'country' => $result['datos']['country'],
+        'province' => $result['datos']['province'],
+        'city' => $result['datos']['city'],
 				'avatar' => $result_avatar['datos']
+				
 
 
 			);
+			$arrValue = false;
+			$path_model = $_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
+			$arrValue = loadModel($path_model, "user_model", "create_user", $arrArgument);
+			// echo '<script>';
+			// echo "console.log('ArrValue'+'$arrValue')";
+			// echo '</script>';
+			/*echo json_encode($arrValue);
+			die();*/
 
-			$mensaje = "User has been successfully registered";
+			if ($arrValue){
+					$mensaje = "Su registro se ha efectuado correctamente, para finalizar compruebe que ha recibido un correo de validacion y siga sus instrucciones";
+			}else{
+					$mensaje = "No se ha podido realizar su alta. Intentelo mas tarde";
+				}
+
+			//$mensaje = "User has been successfully registered";
 
 			$_SESSION['rooms'] = $arrArgument;
 			$_SESSION['msje'] = $mensaje;
@@ -90,6 +107,9 @@
 			$callback = "index.php?module=rooms&view=results_rooms";
 			$jsondata["success"] = true;
 	        $jsondata["redirect"] = $callback;
+					// echo '<script>';
+					// echo "console.log('ArrValue')";
+					// echo '</script>';
 	        echo json_encode($jsondata);
         	exit;
 		} else {
@@ -158,3 +178,59 @@ if ((isset($_GET["load_data"])) && ($_GET["load_data"] == true)) {
         exit;
     }
 }
+
+/////////////////////////////////////////////////// load_country
+if(  (isset($_GET["load_country"])) && ($_GET["load_country"] == true)  ){
+		$json = array();
+
+    	$url = 'http://www.oorsprong.org/websamples.countryinfo/CountryInfoService.wso/ListOfCountryNamesByName/JSON';
+		$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms//model/model/';
+		$json = loadModel($path_model, "user_model", "obtain_countries", $url);
+
+		if($json){
+			echo $json;
+			exit;
+		}else{
+			$json = "error";
+			echo $json;
+			exit;
+		}
+	}
+
+/////////////////////////////////////////////////// load_provinces
+if(  (isset($_GET["load_provinces"])) && ($_GET["load_provinces"] == true)  ){
+    	$jsondata = array();
+        $json = array();
+
+		$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
+		$json = loadModel($path_model, "user_model", "obtain_provinces");
+
+		if($json){
+			$jsondata["provinces"] = $json;
+			echo json_encode($jsondata);
+			exit;
+		}else{
+			$jsondata["provinces"] = "error";
+			echo json_encode($jsondata);
+			exit;
+		}
+	}
+
+/////////////////////////////////////////////////// load_cities
+if(  isset($_POST['idPoblac']) ){
+	    $jsondata = array();
+        $json = array();
+
+		$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
+		$json = loadModel($path_model, "user_model", "obtain_cities", $_POST['idPoblac']);
+
+		if($json){
+			$jsondata["cities"] = $json;
+			echo json_encode($jsondata);
+			exit;
+		}else{
+			$jsondata["cities"] = "error";
+			echo json_encode($jsondata);
+			exit;
+		}
+	}

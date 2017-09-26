@@ -86,12 +86,13 @@ $(document).ready(function () {
 
 
     $('#SubmitRooms').click(function () {
-
+      $('.error1').css('display', 'none');
+      //$('.error1').css('background-color', '#ff0000');
         validate_rooms();
     });
 //Control de seguridad para evitar que al volver atrás de la pantalla results a create, no nos imprima los datos
 
-    $.get("/Server-Project/modules/rooms/controller/controller_rooms.class.php?load_data=true",
+    $.get("/a/Server-Project/modules/rooms/controller/controller_rooms.class.php?load_data=true",
             function (response) {
                 //alert(response.user);
                 if (response.rooms === "") {
@@ -252,9 +253,46 @@ $(document).ready(function () {
                 return false;
             }
         });
+        //Dependent combos //////////////////////////////////
+    load_countries_v1();
+
+    $("#province").empty();
+    $("#province").append('<option value="" selected="selected">Select province</option>');
+    $("#province").prop('disabled', true);
+    $("#city").empty();
+    $("#city").append('<option value="" selected="selected">Select city</option>');
+    $("#city").prop('disabled', true);
+
+    $("#country").change(function() {
+		var country = $(this).val();
+		var province = $("#province");
+		var city = $("#city");
+
+		if(country !== 'ES'){
+	         province.prop('disabled', true);
+	         city.prop('disabled', true);
+	         $("#province").empty();
+		     $("#city").empty();
+		}else{
+	         province.prop('disabled', false);
+	         city.prop('disabled', false);
+	         load_provinces_v1();
+		}//fi else
+	});
+
+	$("#province").change(function() {
+		var prov = $(this).val();
+		if(prov > 0){
+			load_cities_v1(prov);
+		}else{
+			$("#city").prop('disabled', false);
+		}
+	});
     });
 
 function validate_rooms(){
+    //document.getElementsByClassName("error1").style.size = '100px';
+
     var result = true;
 
     var sdesc = document.getElementById('sdesc').value;
@@ -346,8 +384,24 @@ function validate_rooms(){
 
     //Si ha ido todo bien, se envian los datos al servidor
     if (result) {
-      alert("sdesc"+sdesc);
-        var data = {"sdesc": sdesc, "maxguest": maxguest, "numbrooms": numbrooms, "date_start": date_start, "numbbeds": numbbeds, "numbbaths": numbbaths, "end_date": end_date, "dayprice": dayprice, "weeklyprice": weeklyprice,
+
+      if (province === null) {
+           province = 'default_province';
+       }else if (province.length === 0) {
+           province = 'default_province';
+       }else if (province === 'Select province') {
+           return 'default_province';
+       }
+
+       if (city === null) {
+           city = 'default_city';
+       }else if (city.length === 0) {
+           city = 'default_city';
+       }else if (city === 'Select city') {
+           return 'default_city';
+       }
+      alert("country"+country);
+        var data = {"sdesc": sdesc, "maxguest": maxguest, "numbrooms": numbrooms, "date_start": date_start, "numbbeds": numbbeds, "numbbaths": numbbaths, "end_date": end_date, "dayprice": dayprice, "weeklyprice": weeklyprice,"country": country, "province": province, "city": city,
             "name": name, "email": email, "country": country, "components": components, "services": services };
 
         var data_users_JSON = JSON.stringify(data);
@@ -365,18 +419,38 @@ function validate_rooms(){
             console.log("1 "+response.redirect);
 
 
-    }, "json").fail(function(xhr, status, error) {
+    }, "json").fail(function(xhr, textStatus, error) {
 
         console.log(xhr.responseText);
         console.log("2 "+xhr.responseText.success);
         console.log("2 "+xhr.responseText.redirect);
+
+        if (xhr.status === 0) {
+                alert('Not connect: Verify Network.');
+            } else if (xhr.status == 404) {
+                alert('Requested page not found [404]');
+            } else if (xhr.status == 500) {
+                alert('Internal Server Error [500].');
+            } else if (textStatus === 'parsererror') {
+                alert('Requested JSON parse failed.');
+            } else if (textStatus === 'timeout') {
+                alert('Time out error.');
+            } else if (textStatus === 'abort') {
+                alert('Ajax request aborted.');
+            } else {
+                alert('Uncaught Error/Normal: ' + xhr.responseText);
+            }
             //console.log(xhr.responseText);
             //console.log(xhr.responseJSON);
 
-         if (xhr.responseJSON.error.sdesc)
-              $("#sdesc").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.sdesc + "</span>");
+         if (xhr.responseJSON.error.sdesc){
 
+
+              $("#sdesc").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.sdesc + "</span>");
+            }
          if (xhr.responseJSON.error.maxguest)
+
+
               $("#maxguest").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.maxguest + "</span>");
 
          if (xhr.responseJSON.error.numbrooms)
@@ -413,8 +487,15 @@ function validate_rooms(){
         if (xhr.responseJSON.error.email)
             $("#email").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.email + "</span>");
 
-        if (xhr.responseJSON.error.country)
-            $("#country").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.country + "</span>");
+            if(xhr.responseJSON.error.country)
+                $("#error_country").focus().after("<span  class='error1'>" + xhr.responseJSON.error.country + "</span>");
+
+              if(xhr.responseJSON.error.province)
+                $("#error_province").focus().after("<span  class='error1'>" + xhr.responseJSON.error.province + "</span>");
+
+              if(xhr.responseJSON.error.city)
+                $("#error_city").focus().after("<span  class='error1'>" + xhr.responseJSON.error.city + "</span>");
+
 
         if (xhr.responseJSON.error_avatar)
             $("#dropzone").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error_avatar + "</span>");
@@ -462,6 +543,120 @@ function validate_rooms(){
 
 
 
+function load_countries_v2(cad) {
+    $.getJSON( cad, function(data) {
+      $("#country").empty();
+      $("#country").append('<option value="" selected="selected">Select country</option>');
+
+      $.each(data, function (i, valor) {
+        $("#country").append("<option value='" + valor.sISOCode + "'>" + valor.sName + "</option>");
+      });
+    })
+    .fail(function() {
+        alert( "error load_countries" );
+    });
+}
+
+function load_countries_v1() {
+    $.get( "modules/rooms/controller/controller_rooms.class.php?load_country=true",
+        function( response ) {
+            //console.log(response);
+            if(response === 'error'){
+                load_countries_v2("resources/ListOfCountryNamesByName.json");
+            }else{
+                load_countries_v2("modules/rooms/controller/controller_rooms.class.php?load_country=true"); //oorsprong.org
+            }
+    })
+    .fail(function(response) {
+        load_countries_v2("resources/ListOfCountryNamesByName.json");
+    });
+}
+
+function load_provinces_v2() {
+    $.get("resources/provinciasypoblaciones.xml", function (xml) {
+	    $("#province").empty();
+	    $("#province").append('<option value="" selected="selected">Select province</option>');
+
+        $(xml).find("provincia").each(function () {
+            var id = $(this).attr('id');
+            var name = $(this).find('nombre').text();
+            $("#province").append("<option value='" + id + "'>" + name + "</option>");
+        });
+    })
+    .fail(function() {
+        alert( "error load_provinces" );
+    });
+}
+
+function load_provinces_v1() { //provinciasypoblaciones.xml - xpath
+    $.get( "modules/rooms/controller/controller_rooms.class.php?load_provinces=true",
+        function( response ) {
+          $("#province").empty();
+	        $("#province").append('<option value="" selected="selected">Select province</option>');
+
+            //alert(response);
+        var json = JSON.parse(response);
+		    var provinces=json.provinces;
+		    //alert(provinces);
+		    //console.log(provinces);
+
+		    //alert(provinces[0].id);
+		    //alert(provinces[0].nombre);
+
+            if(provinces === 'error'){
+                load_provinces_v2();
+            }else{
+                for (var i = 0; i < provinces.length; i++) {
+        		    $("#province").append("<option value='" + provinces[i].id + "'>" + provinces[i].nombre + "</option>");
+    		    }
+            }
+    })
+    .fail(function(response) {
+        load_provinces_v2();
+    });
+}
+
+function load_cities_v2(prov) {
+    $.get("resources/provinciasypoblaciones.xml", function (xml) {
+		$("#city").empty();
+	    $("#city").append('<option value="" selected="selected">Select city</option>');
+
+		$(xml).find('provincia[id=' + prov + ']').each(function(){
+    		$(this).find('localidad').each(function(){
+    			 $("#city").append("<option value='" + $(this).text() + "'>" + $(this).text() + "</option>");
+    		});
+        });
+	})
+	.fail(function() {
+        alert( "error load_cities" );
+    });
+}
+
+function load_cities_v1(prov) { //provinciasypoblaciones.xml - xpath
+    var datos = { idPoblac : prov  };
+	$.post("modules/rooms/controller/controller_rooms.class.php", datos, function(response) {
+	    //alert(response);
+        var json = JSON.parse(response);
+		var cities=json.cities;
+		//alert(poblaciones);
+		//console.log(poblaciones);
+		//alert(poblaciones[0].poblacion);
+
+		$("#city").empty();
+	    $("#city").append('<option value="" selected="selected">Select city</option>');
+
+        if(cities === 'error'){
+            load_cities_v2(prov);
+        }else{
+            for (var i = 0; i < cities.length; i++) {
+        		$("#city").append("<option value='" + cities[i].poblacion + "'>" + cities[i].poblacion + "</option>");
+    		}
+        }
+	})
+	.fail(function() {
+        load_cities_v2(prov);
+    });
+}
 
 
 

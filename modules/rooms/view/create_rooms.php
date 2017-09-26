@@ -365,7 +365,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <!--<div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
                                             <select class="form-control" name="country" id="country">
@@ -620,15 +620,42 @@
                                                 <option value="ZMB">Zambia</option>
                                                 <option value="ZWE">Zimbabwe</option>
                                             </select>
-                                            <div id="country"><?php
-                                                if (isset($error['country'])) {
-                                                    print ("<BR><span style='color: #ff0000'>" . "* " . $error['country'] . "</span><br/>");
-                                                }
-                                                ?>
+                                            <div id="country">
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
+                                <td>Country: </td>
+			  <td id="error_country">
+			    <select name="country" id="country">
+			    <option selected>Select country</option>
+				</select>
+				<div ></div>
+			</td>
+        </tr>
+        <tr>
+          <td> </td>
+        </tr>
+        <tr>
+            <td>Province: </td>
+			  <td id="error_province">
+			    <select name="province" id="province">
+			    <option selected>Select province</option>
+				</select>
+				<div></div>
+			</td>
+        </tr>
+        <tr>
+          <td> </td>
+        </tr>
+        <tr>
+            <td>City: </td>
+			  <td id="error_city">
+			    <select name="city" id="city">
+			    <option selected>Select city</option>
+				</select>
+				<div></div>
+			</td>
                                 <br />
                     <br />
                     <br />
