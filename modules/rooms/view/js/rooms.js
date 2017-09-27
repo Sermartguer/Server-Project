@@ -84,6 +84,18 @@ Dropzone.autoDiscover = false;
 $(document).ready(function () {
 //
 
+    $( "#date_start" ).datepicker({
+        dateFormat: 'dd/mm/yy',
+        //dateFormat: 'mm-dd-yy',
+        changeMonth: true, changeYear: true,
+        minDate: 0, maxDate: "+36M"
+    });
+    $( "#end_date" ).datepicker({
+      dateFormat: 'dd/mm/yy',
+      //dateFormat: 'mm-dd-yy',
+      changeMonth: true, changeYear: true,
+      minDate: 0, maxDate: "+36M"
+    });
 
     $('#SubmitRooms').click(function () {
       $('.error1').css('display', 'none');
