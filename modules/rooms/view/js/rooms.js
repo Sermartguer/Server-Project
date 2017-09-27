@@ -104,7 +104,7 @@ $(document).ready(function () {
     });
 //Control de seguridad para evitar que al volver atrás de la pantalla results a create, no nos imprima los datos
 
-    $.get("/a/Server-Project/modules/rooms/controller/controller_rooms.class.php?load_data=true",
+    $.get("/Server-Project/modules/rooms/controller/controller_rooms.class.php?load_data=true",
             function (response) {
                 //alert(response.user);
                 if (response.rooms === "") {

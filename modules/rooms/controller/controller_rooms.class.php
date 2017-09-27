@@ -1,9 +1,9 @@
 <?php
 	session_start();
 
-	include ($_SERVER['DOCUMENT_ROOT'] . "/a/Server-Project/modules/rooms/utils/functions_rooms.inc.php");
-	include ($_SERVER['DOCUMENT_ROOT'] . "/a/Server-Project/utils/upload.php");
-	include ($_SERVER['DOCUMENT_ROOT'] . "/a/Server-Project/utils/common.inc.php");
+	include ($_SERVER['DOCUMENT_ROOT'] . "/Server-Project/modules/rooms/utils/functions_rooms.inc.php");
+	include ($_SERVER['DOCUMENT_ROOT'] . "/Server-Project/utils/upload.php");
+	include ($_SERVER['DOCUMENT_ROOT'] . "/Server-Project/utils/common.inc.php");
 	//echo "<br>";
 
 	//echo "<br>";
@@ -85,7 +85,7 @@
 
 			);
 			$arrValue = false;
-			$path_model = $_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
+			$path_model = $_SERVER['DOCUMENT_ROOT'] . '/Server-Project/modules/rooms/model/model/';
 			$arrValue = loadModel($path_model, "user_model", "create_user", $arrArgument);
 			// echo '<script>';
 			// echo "console.log('ArrValue'+'$arrValue')";
@@ -184,7 +184,7 @@ if(  (isset($_GET["load_country"])) && ($_GET["load_country"] == true)  ){
 		$json = array();
 
     	$url = 'http://www.oorsprong.org/websamples.countryinfo/CountryInfoService.wso/ListOfCountryNamesByName/JSON';
-		$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms//model/model/';
+		$path_model=$_SERVER['DOCUMENT_ROOT'] . '/Server-Project/modules/rooms//model/model/';
 		$json = loadModel($path_model, "user_model", "obtain_countries", $url);
 
 		if($json){
@@ -202,7 +202,7 @@ if(  (isset($_GET["load_provinces"])) && ($_GET["load_provinces"] == true)  ){
     	$jsondata = array();
         $json = array();
 
-		$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
+		$path_model=$_SERVER['DOCUMENT_ROOT'] . '/Server-Project/modules/rooms/model/model/';
 		$json = loadModel($path_model, "user_model", "obtain_provinces");
 
 		if($json){
@@ -221,7 +221,7 @@ if(  isset($_POST['idPoblac']) ){
 	    $jsondata = array();
         $json = array();
 
-		$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
+		$path_model=$_SERVER['DOCUMENT_ROOT'] . '/Server-Project/modules/rooms/model/model/';
 		$json = loadModel($path_model, "user_model", "obtain_cities", $_POST['idPoblac']);
 
 		if($json){
