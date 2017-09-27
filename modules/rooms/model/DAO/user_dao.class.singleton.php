@@ -92,9 +92,9 @@ class userDAO {
         $avatar = $arrArgument['avatar'];
 
         $sql = "INSERT INTO rooms (sdesc, maxguest, numbrooms, date_start,"
-                . " numbbeds, numbbaths, end_date, dayprice, weeklyprice,country, province,city,name,email, avatar"
+                . " numbbeds, numbbaths, end_date, dayprice, weeklyprice,botiquin,pestillo,extintor,ficha,cocina,internet,tv,calefaccion,aire,mascotas,basicos,parking,rutas,country,province,city,name,email, avatar"
                 . " ) VALUES ('$sdesc', '$maxguest', '$numbrooms',"
-                . " '$date_start', '$numbbeds', '$numbbaths', '$end_date', '$dayprice', '$weeklyprice','$country', '$province','$city','$name','$email', '$avatar')";
+                . " '$date_start', '$numbbeds', '$numbbaths', '$end_date', '$dayprice', '$weeklyprice','$botiquin','$pestillo','$extintor','$ficha','$cocina','$internet','$tv','$calefaccion','$aire','$mascotas','$basicos','$parking','$rutas','$country','$province','$city','$name','$email', '$avatar')";
 
                 // echo '<script>';
                 // echo "console.log('$sql')";

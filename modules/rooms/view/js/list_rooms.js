@@ -75,8 +75,16 @@ function pintar_rooms(data) {
     email.innerHTML += data.rooms.email;
 
     var country = document.createElement("div");
-    country.innerHTML = "country = ";
-    country.innerHTML += data.rooms.country;
+  country.innerHTML = "country = ";
+  country.innerHTML += data.rooms.country;
+
+  var province = document.createElement("div");
+  province.innerHTML = "province = ";
+  province.innerHTML += data.rooms.province;
+
+  var city = document.createElement("div");
+  city.innerHTML = "city = ";
+  city.innerHTML += data.rooms.city;
 
     var components = document.createElement("div");
     components.innerHTML = "interests = ";
@@ -114,6 +122,9 @@ function pintar_rooms(data) {
     parrafo.appendChild(name);
     parrafo.appendChild(email);
     parrafo.appendChild(country);
+    parrafo.appendChild(province);
+    parrafo.appendChild(city);
+
     parrafo.appendChild(components);
     parrafo.appendChild(services);
 

@@ -307,6 +307,8 @@ function validate_rooms(){
     var name = document.getElementById('name').value;
     var email = document.getElementById('email').value;
     var country = document.getElementById('country').value;
+   var province = document.getElementById('province').value;
+   var city = document.getElementById('city').value;
 
     var components = [];
     var inputcompo = document.getElementsByClassName('msjcompo');
@@ -380,6 +382,20 @@ function validate_rooms(){
             $("#email").focus().after("<span class='error' style='color: #ff0000'>Error format email (example@example.com).</span>");
             return false;
         }
+        if ($("#country").val() === "" || $("#country").val() === "Select country" || $("#country").val() === null) {
+       $("#country").focus().after("<span class='error'>Select one country</span>");
+       return false;
+   }
+
+   if ($("#province").val() === "" || $("#province").val() === "Select province") {
+       $("#province").focus().after("<span class='error'>Select one province</span>");
+       return false;
+   }
+
+   if ($("#city").val() === "" || $("#city").val() === "Select city") {
+       $("#city").focus().after("<span class='error'>Select one city</span>");
+       return false;
+   }
 
 
     //Si ha ido todo bien, se envian los datos al servidor
@@ -401,8 +417,10 @@ function validate_rooms(){
            return 'default_city';
        }
       alert("country"+country);
+      alert("province"+province);
+      alert("city"+city);
         var data = {"sdesc": sdesc, "maxguest": maxguest, "numbrooms": numbrooms, "date_start": date_start, "numbbeds": numbbeds, "numbbaths": numbbaths, "end_date": end_date, "dayprice": dayprice, "weeklyprice": weeklyprice,"country": country, "province": province, "city": city,
-            "name": name, "email": email, "country": country, "components": components, "services": services };
+            "name": name, "email": email, "components": components, "services": services };
 
         var data_users_JSON = JSON.stringify(data);
         console.log("Stringfy"+data_users_JSON);

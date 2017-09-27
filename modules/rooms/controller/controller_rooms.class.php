@@ -80,7 +80,7 @@
         'province' => $result['datos']['province'],
         'city' => $result['datos']['city'],
 				'avatar' => $result_avatar['datos']
-				
+
 
 
 			);
