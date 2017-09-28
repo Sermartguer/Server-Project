@@ -1,5 +1,5 @@
 <?php
-	$path=$_SERVER['DOCUMENT_ROOT'] . '/Server-Project/';
+	$path=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/';
 	if (!defined('SITE_ROOT')) define('SITE_ROOT', $path);
 	if( !defined ( 'MODEL_PATH' )) define('MODEL_PATH', SITE_ROOT . 'model/');
 

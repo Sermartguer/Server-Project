@@ -1,6 +1,6 @@
 <?php
 
-$path = $_SERVER['DOCUMENT_ROOT'] . '/Server-Project/';
+$path = $_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/';
 //define('SITE_ROOT', $path);
 if (!defined('SITE_ROOT')) define('SITE_ROOT', $path);
 
