@@ -267,6 +267,9 @@ $(document).ready(function () {
         });
         //Dependent combos //////////////////////////////////
     load_countries_v1();
+    $("#community").empty();
+    $("#community").append('<option value="" selected="selected">Select community</option>');
+    $("#community").prop('disabled', true);
 
     $("#province").empty();
     $("#province").append('<option value="" selected="selected">Select province</option>');
@@ -277,15 +280,18 @@ $(document).ready(function () {
 
     $("#country").change(function() {
 		var country = $(this).val();
+    var community = $("#community");
 		var province = $("#province");
 		var city = $("#city");
 
 		if(country !== 'ES'){
 	         province.prop('disabled', true);
 	         city.prop('disabled', true);
+            $("#community").empty();
 	         $("#province").empty();
 		     $("#city").empty();
 		}else{
+          community.prop('disabled', false);
 	         province.prop('disabled', false);
 	         city.prop('disabled', false);
 	         load_provinces_v1();
