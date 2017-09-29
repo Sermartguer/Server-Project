@@ -306,7 +306,7 @@ function validate_rooms(){
     //document.getElementsByClassName("error1").style.size = '100px';
 
     var result = true;
-
+    var sp=document.getElementById('qty').value;
     var sdesc = document.getElementById('sdesc').value;
     var maxguest = document.getElementById('maxguest').value;
     var numbrooms = document.getElementById('numbrooms').value;
@@ -314,8 +314,8 @@ function validate_rooms(){
     var numbbeds = document.getElementById('numbbeds').value;
     var numbbaths = document.getElementById('numbbaths').value;
     var end_date = document.getElementById('end_date').value;
-    var dayprice = document.getElementById('dayprice').value;
-    var weeklyprice = document.getElementById('weeklyprice').value;
+    var dayprice = document.getElementById('qty').value;
+    var weeklyprice = document.getElementById('qty2').value;
     var name = document.getElementById('name').value;
     var email = document.getElementById('email').value;
     var country = document.getElementById('country').value;
@@ -428,6 +428,7 @@ function validate_rooms(){
        }else if (city === 'Select city') {
            return 'default_city';
        }
+       alert("sp"+qty);
       alert("country"+country);
       alert("province"+province);
       alert("city"+city);
@@ -476,7 +477,9 @@ function validate_rooms(){
          if (xhr.responseJSON.error.sdesc){
 
 
-              $("#sdesc").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.sdesc + "</span>");
+            //  $("#sdesc").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.sdesc + "</span>");
+              document.getElementById('e_sdesc').innerHTML=xhr.responseJSON.error.sdesc;
+
             }
          if (xhr.responseJSON.error.maxguest)
 
@@ -489,9 +492,10 @@ function validate_rooms(){
         if (xhr.responseJSON.error.numbbeds)
               $("#numbbeds").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.numbbeds + "</span>");
 
-        if (xhr.responseJSON.error.numbbaths)
+        if (xhr.responseJSON.error.numbbaths){
               $("#numbbaths").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.numbbaths + "</span>");
-
+              document.getElementById('up').style.marginTop = "-80px";
+            }
         if (xhr.responseJSON.error.dayprice)
               $("#dayprice").focus().after("<span  class='error1' style='color:red;'>" + xhr.responseJSON.error.dayprice + "</span>");
 
