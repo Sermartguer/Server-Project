@@ -11,7 +11,7 @@ session_start();
 	}
 
 	if ( (isset($_GET['module'])) && (isset($_GET['view'])) ) {
-		require_once("modules/".$_GET['module']."/view/".$_GET['view'].".html");
+		require_once("modules/".$_GET['module']."/view/".$_GET['view'].".php");
 	}
 require_once("view/inc/footer.php");
 require_once("view/inc/bottom_page.php");

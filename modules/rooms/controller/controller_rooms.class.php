@@ -27,28 +27,6 @@
 
 	function alta_users() {
 
-		/*echo json_encode("pepe");
-        	die();*/
-
-        	/*echo "pepe";
-        	exit;*/
-
-		/*header('HTTP/1.0 400 Bad error');
-        	echo "pepe";
-        	exit;*/
-/*
-		$callback = "index.php?module=rooms&view=results_rooms";
-			$jsondata["success"] = true;
-	        $jsondata["redirect"] = $callback;
-	        echo json_encode($jsondata);
-	        die();*/
-
-			/*header('HTTP/1.0 400 Bad error');
-	        $callback = "index.php?module=rooms&view=results_rooms";
-			$jsondata["success"] = true;
-	        $jsondata["redirect"] = $callback;
-	        echo json_encode($jsondata);
-	        die();*/
 
 
 			$jsondata = array();

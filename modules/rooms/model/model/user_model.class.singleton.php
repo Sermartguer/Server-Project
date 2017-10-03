@@ -35,6 +35,6 @@ class user_model {
     public Function obtain_cities($arrArgument){
         return $this->bll->obtain_cities_BLL($arrArgument);
     }
-    
+
 
 }
