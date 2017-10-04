@@ -284,7 +284,7 @@ $(document).ready(function () {
 		var province = $("#province");
 		var city = $("#city");
 
-		if(country !== 'ES'){
+		if(country !== 'Spain'){
 	         province.prop('disabled', true);
 	         city.prop('disabled', true);
             $("#community").empty();
@@ -589,7 +589,7 @@ function load_countries_v2(cad) {
       $("#country").append('<option value="" selected="selected">Select country</option>');
 
       $.each(data, function (i, valor) {
-        $("#country").append("<option value='" + valor.sISOCode + "'>" + valor.sName + "</option>");
+        $("#country").append("<option value='" + valor.sName + "'>" + valor.sName + "</option>");
       });
     })
     .fail(function() {

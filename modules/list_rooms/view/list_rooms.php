@@ -3,7 +3,6 @@
     <div class="container mt-5" style="padding-top:50px;">
         <div class="center">
             <h2>List Rooms</h2>
-            <p class="lead">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
 
 
