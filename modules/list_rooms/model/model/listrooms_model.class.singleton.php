@@ -20,8 +20,8 @@ class listrooms_model {
         return self::$_instance;
     }
 
-    public function select_rooms() {
-        return $this->bll->select_rooms_BLL();
+    public function select_rooms($limit) {
+        return $this->bll->select_rooms_BLL($limit);
 
     }
     public function select_one_rooms($id) {

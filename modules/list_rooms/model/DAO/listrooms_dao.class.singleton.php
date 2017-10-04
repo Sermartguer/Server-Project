@@ -15,8 +15,8 @@ class listroomsDAO {
         return self::$_instance;
     }
 
-    public function select_rooms_DAO($db) {
-      $sql = "SELECT * FROM rooms";
+    public function select_rooms_DAO($db,$limit) {
+      $sql = "SELECT * FROM rooms LIMIT $limit";
       $stmt = $db->ejecutar($sql);
       return $db->listar($stmt);
 

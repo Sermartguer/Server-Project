@@ -39,12 +39,15 @@ $arrValue = loadModel($path_model, "listrooms_model", "select_one_rooms",$_SESSI
 
 
 //LIST
-	if ((isset($_GET["get_data"])) && ($_GET["get_data"] == true)) {
+	if (isset($_GET["get_data"])) {
+			$_SESSION['limit'] =  $_GET["get_data"];
 
 			$path_model = $_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/list_rooms/model/model/';
-			$arrValue = loadModel($path_model, "listrooms_model", "select_rooms");
+			$arrValue = loadModel($path_model, "listrooms_model", "select_rooms",$_SESSION['limit']);
 
 			if ($arrValue) {
+				$jsondata['limit'] = $_SESSION['limit'];
+
 				$jsondata["results"] = $arrValue;
 				echo json_encode($jsondata);
 				exit;

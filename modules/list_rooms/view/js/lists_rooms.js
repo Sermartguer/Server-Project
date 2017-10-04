@@ -1,15 +1,25 @@
+var limite;
 
-
-function load_rooms() {
+//LOAD ROOMS(select*from rooms limit x)
+function load_rooms(limit) {
+  if(limit===undefined){
+     limit=3;
+  }
+  console.log(limit);
   $.ajax({
         type: 'GET',
-        url: "/a/Server-Project/modules/list_rooms/controller/controller_listrooms.class.php?get_data=true",
+        url: "/a/Server-Project/modules/list_rooms/controller/controller_listrooms.class.php?get_data="+limit,
         // dataType: 'json',
         async: false
       }).done(function(data) {
         //console.log(data);
         var json = JSON.parse(data);
+        //console.log(data);
         pintar_rooms(json);
+        limite = json.limit;
+        //console.log(typeof limite);
+        limite= parseInt(limite);
+        //console.log("limite"+limite);
       })
       .fail(function(xhr) {
       });
@@ -26,7 +36,7 @@ function list_id(id){
         async: false
       }).done(function(data){
         var json = JSON.parse(data);
-      console.log(json);
+      // console.log(json);
 
       window.location.href = json.redirect;
 
@@ -35,27 +45,15 @@ function list_id(id){
     });
 }
 
-
+//ON-READY
 $(document).ready(function() {
    load_rooms();
-  //click();
-  $('.btn').click(function () {
-        var id = this.getAttribute('value');
-		console.log(id); //25
-list_id(id);
-console.log("w");
-
-
-		/*$.get("/a/Server-Project/modules/list_rooms/controller/controller_listrooms.class.php?detail_room="+id , function (data, status) {
-      var json = JSON.parse(data);
-    //alert("Data: " + data + "\nStatus: " + status);
-    console.log(json);
-    window.location.href = json.redirect;
-
-  });*/
-	});
+   click_test();
+   scroll();
 
 });
+
+//PRINT-ROOMS
 function pintar_rooms(data) {
 
     var fila = document.createElement("div");
@@ -67,7 +65,7 @@ function pintar_rooms(data) {
       var arr = data.results[i];
 
       var col = document.createElement("div");
-      col.setAttribute("class","col-sm-6 col-md-4 col-lg-3 col-xl-4");
+      col.setAttribute("class","col-sm-6 col-md-4 col-lg-3 col-xl-4 mb-3");
       var card = document.createElement("div");
       card.setAttribute("class","card");
       card.setAttribute("id","id"+i);
@@ -121,26 +119,35 @@ function pintar_rooms(data) {
 
     }
 }
-/*function click(){
-   buttons = document.getElementsByTagName("button");
-        for (var i = 0; i < buttons.length; i++) {
-        buttons[i].setAttribute("value",i);
-        buttons[i].onclick = function(event){
-          var valor = event.target.value;
-          //reset(event.target.value);
 
-          $.ajax({
-                type: 'GET',
-                url: "/a/Server-Project/modules/list_rooms/controller/controller_listrooms.class.php?idProduct=true",
-                // dataType: 'json',
-                async: false
-              }).done(function(data) {
-                console.log(data);
-                var json = JSON.parse(data);
 
-              })
-              .fail(function(xhr) {
-              });
-        };
+//SCROLL FUNCTION
+function scroll(){
+  $(window).scroll(function () {
+
+    if($(window).scrollTop() + $(window).height()+2 >= $(document).height()){
+
+      clearTimeout($.data(this, 'scrollTimer'));
+
+       $.data(this, 'scrollTimer', setTimeout(function() {
+           click_test();
+       }, 0));
+      //console.log("dentro");  //user scrolled to bottom of the page?
+       var myNode = document.getElementById("tst");
+       while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+        }
+          load_rooms(limite+3);
       }
-}*/
+  });
+}
+
+
+//CLICK FUNCTION(get value)
+function click_test(){
+  $('.btn').click(function () {
+        var id = this.getAttribute('value');
+    // console.log(id); //25
+    list_id(id);
+  });
+}
