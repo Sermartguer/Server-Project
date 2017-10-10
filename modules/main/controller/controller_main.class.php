@@ -1,11 +1,19 @@
-<section class="mt-5 contenedor masthead">
-	<div class="container">
-	    <img class="img-fluid" src="view/img/server-icon.png" alt="">
-	    <div class="intro-text">
-	        <span class="name">Server Project</span>
-	        <hr class="star-light">
-	        <span class="skills">Junior Web Developer</span>
-            <br>  
-	    </div>
-    </div>
-</section>
+
+<?php
+class controller_main {
+
+    function __construct() {
+        //include(UTILS . "common.inc.php");
+    }
+
+    function begin() {
+			require_once(VIEW_PATH_INC ."top_page.php");
+			require_once(VIEW_PATH_INC ."menu.php");
+
+        loadView('modules/main/view/', 'main.php');
+
+        require_once(VIEW_PATH_INC . "footer.php");
+				require_once(VIEW_PATH_INC ."bottom_page.php");
+    }
+
+}
