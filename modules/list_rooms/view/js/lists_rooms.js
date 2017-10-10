@@ -124,7 +124,7 @@ function pintar_rooms(data) {
 //SCROLL FUNCTION
 function scroll(){
   $(window).scroll(function () {
-
+  
     if($(window).scrollTop() + $(window).height()+2 >= $(document).height()){
 
       clearTimeout($.data(this, 'scrollTimer'));

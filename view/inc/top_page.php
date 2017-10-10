@@ -16,6 +16,7 @@
     <link href="view/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'></script>
 		<link rel="stylesheet" href="view/css/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<!-- Datepicker -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>

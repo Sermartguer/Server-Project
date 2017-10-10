@@ -1,8 +1,7 @@
 *{
 	margin:0;
 	padding:0;
-	font-family: 'Roboto', sans-serif;
-
+	font-family: 'Lato', sans-serif;
 }
 .contenedor{
 	background: #18bc9c;
@@ -258,4 +257,71 @@ h5 {
 
 .meta a:hover {
     color: rgba(0, 0, 0, .87);
+}
+.imga{
+
+	background-image: url(../../media/qwerty.jpeg);
+	    height: 550px !important;
+			background-repeat: no-repeat !important;
+    background-size: cover !important;
+		background-position: 50% 50% !important;
+
+}
+
+
+
+
+.profile-header-container{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.profile-header-img {
+    padding: 10px;
+}
+
+.profile-header-img > img.img-circle {
+    width: 90px;
+    height: 90px;
+    border: 2px solid #51D2B7;
+}
+.img-circle{
+	border-radius: 50%;
+}
+.profile-header {
+    margin-top: 43px;
+}
+
+/**
+ * Ranking component
+ */
+.rank-label-container {
+    margin-top: -19px;
+    /* z-index: 1000; */
+    text-align: center;
+}
+
+.label.label-default.rank-label {
+    background-color: rgb(81, 210, 183);
+    padding: 5px 10px 5px 10px;
+    border-radius: 27px;
+}
+#cardas{
+	background-color: #fff;
+	margin-top:5px;
+	margin-left: 2.5px;
+	margin-right: 2.5px;
+	margin-bottom: 5px;
+}
+.descripcion{
+	font-weight: bold;
+	font-size: 120%;
+}
+.prices{
+	margin-left: 40%;
+	margin-top: 10px;
+}
+.dayprice .weeklyprice{
+
+	font-size: 105%;
 }

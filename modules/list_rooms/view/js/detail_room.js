@@ -23,14 +23,14 @@ load_detail_room();
 
 function print_details_rooms(room) {
   document.getElementById("descripcion").innerHTML = room[0].sdesc;
-  document.getElementById("maxguest").innerHTML = "Max Guests: "+room[0].maxguest;
-  document.getElementById("numbrooms").innerHTML = "Number of Rooms: "+room[0].numbrooms;
-  document.getElementById("numbrooms").innerHTML = "Date Start: "+room[0].date_start;
-  document.getElementById("end_date").innerHTML = "Date End: "+room[0].end_date;
-  document.getElementById("numbbeds").innerHTML = "Number of beds: "+room[0].numbbeds;
-  document.getElementById("numbbaths").innerHTML = "Number of baths: "+room[0].numbbaths;
-  document.getElementById("dayprice").innerHTML = "Price for one day: "+room[0].dayprice+" $";
-  document.getElementById("weeklyprice").innerHTML = "Price for a week: "+room[0].weeklyprice+" $";
+  document.getElementById("maxguest").innerHTML = room[0].maxguest;
+  document.getElementById("numbrooms").innerHTML =room[0].numbrooms;
+  document.getElementById("date_start").innerHTML = room[0].date_start+" ";
+  document.getElementById("end_date").innerHTML =   " "+room[0].end_date;
+  document.getElementById("numbbeds").innerHTML = room[0].numbbeds;
+  document.getElementById("numbbaths").innerHTML = room[0].numbbaths;
+  document.getElementById("dayprice").innerHTML = "Price per night: "+room[0].dayprice+" $";
+  document.getElementById("weeklyprice").innerHTML = "Price per week: "+room[0].weeklyprice+" $";
   var components = "";
 
   if (room[0].botiquin == 1)
@@ -66,21 +66,21 @@ function print_details_rooms(room) {
 
   document.getElementById("services").innerHTML = "Services: "+services;
 
-  document.getElementById("country").innerHTML = "Country: "+room[0].country;
+  document.getElementById("country").innerHTML =room[0].country;
 
   if (room[0].province === "default_province"){
     document.getElementById("province").style.visibility.hidden;
   }else{
-    document.getElementById("province").innerHTML = "Province: "+room[0].province;
+    document.getElementById("province").innerHTML = room[0].province;
   }
 
   if (room[0].city === "default_city"){
     document.getElementById("city").style.visibility.hidden;
   }else{
-    document.getElementById("city").innerHTML = "City: "+room[0].city;
+    document.getElementById("city").innerHTML = room[0].city;
   }
 
-  document.getElementById("name").innerHTML = "Username: "+room[0].name;
+  document.getElementById("name").innerHTML =room[0].name;
   document.getElementById("email").innerHTML = "Email: "+room[0].email;
   document.getElementById("avatar").setAttribute("src",room[0].avatar);
 
