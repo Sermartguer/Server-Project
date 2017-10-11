@@ -598,18 +598,22 @@ function load_countries_v2(cad) {
 }
 
 function load_countries_v1() {
-    $.get( "modules/rooms/controller/controller_rooms.class.php?load_country=true",
-        function( response ) {
-            //console.log(response);
-            if(response === 'error'){
-                load_countries_v2("resources/ListOfCountryNamesByName.json");
-            }else{
-                load_countries_v2("modules/rooms/controller/controller_rooms.class.php?load_country=true"); //oorsprong.org
-            }
-    })
-    .fail(function(response) {
-        load_countries_v2("resources/ListOfCountryNamesByName.json");
-    });
+    //"index.php?module=users&function=load_countries_users&load_country=true"
+    var amig =amigable_js("?module=rooms&function=load_countries");
+    console.log(amig);
+    $.post(amig,
+            function (response) {
+                console.log(response);
+                if (response === 'error') {
+                    load_countries_v2("../../resources/ListOfCountryNamesByName.json");
+                } else {
+                    //"index.php?module=users&function=load_countries_users&load_country=true"
+                    load_countries_v2("../../rooms/load_countries/load_country"); //oorsprong.org
+                }
+            })
+            .fail(function (response) {
+                load_countries_v2("../../resources/ListOfCountryNamesByName.json");
+            });
 }
 
 function load_provinces_v2() {
@@ -698,7 +702,18 @@ function load_cities_v1(prov) { //provinciasypoblaciones.xml - xpath
     });
 }
 
+function amigable_js(url) {
+    var backurl="";
+    url = url.replace("?", "");
+    url = url.split("&");
 
+    for (var i=0;i<url.length;i++) {
+        var aux = url[i].split("=");
+        backurl +=  "/"+aux[1];
+    }
+    var SITEROOT = "https://localhost/a/Server-Project"
+    return SITEROOT + backurl;
+}
 
 
 //Despres de xhr.responseJSON.error_avatar

@@ -1,5 +1,5 @@
 <?php
-class userDAO {
+class rooms_dao {
     static $_instance;
 
     private function __construct() {

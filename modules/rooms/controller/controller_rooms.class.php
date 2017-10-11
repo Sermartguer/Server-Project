@@ -1,12 +1,84 @@
 <?php
-	session_start();
+class controller_rooms{
+	function __constructor(){
+		include(FUNCTIONS_rooms . "functions_user.inc.php");
+		        include(UTILS . "upload.php");
+		        $_SESSION['module'] = "rooms";
+	}
+	function form_rooms(){
+		require_once(VIEW_PATH_INC ."top_page.php");
+		require_once(VIEW_PATH_INC ."menu.php");
+		loadView('modules/rooms/view/', 'create_rooms.php');
+		require_once(VIEW_PATH_INC . "footer.php");
+		require_once(VIEW_PATH_INC ."bottom_page.php");
+	}
+function load_countries(){
+	/////////////////////////////////////////////////// load_country
 
-	include ($_SERVER['DOCUMENT_ROOT'] . "/a/Server-Project/modules/rooms/utils/functions_rooms.inc.php");
-	include ($_SERVER['DOCUMENT_ROOT'] . "/a/Server-Project/utils/upload.php");
-	include ($_SERVER['DOCUMENT_ROOT'] . "/a/Server-Project/utils/common.inc.php");
-	//echo "<br>";
+			$json = array();
 
-	//echo "<br>";
+	    	$url = 'http://www.oorsprong.org/websamples.countryinfo/CountryInfoService.wso/ListOfCountryNamesByName/JSON';
+			//$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
+			$json = loadModel(MODEL_rooms, "user_model", "obtain_countries", $url);
+
+			if($json){
+				echo $json;
+				exit;
+			}else{
+				$json = "error";
+				echo $json;
+				exit;
+			}
+		}
+	
+function load_provinces(){
+	/////////////////////////////////////////////////// load_provinces
+	if(  (isset($_GET["load_provinces"])) && ($_GET["load_provinces"] == true)  ){
+	    	$jsondata = array();
+	        $json = array();
+
+			$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
+			$json = loadModel($path_model, "user_model", "obtain_provinces");
+
+			if($json){
+				$jsondata["provinces"] = $json;
+				echo json_encode($jsondata);
+				exit;
+			}else{
+				$jsondata["provinces"] = "error";
+				echo json_encode($jsondata);
+				exit;
+			}
+		}
+}
+function load_towns(){
+	/////////////////////////////////////////////////// load_cities
+	if(  isset($_POST['idPoblac']) ){
+		    $jsondata = array();
+	        $json = array();
+
+			$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
+			$json = loadModel($path_model, "user_model", "obtain_cities", $_POST['idPoblac']);
+
+			if($json){
+				$jsondata["cities"] = $json;
+				echo json_encode($jsondata);
+				exit;
+			}else{
+				$jsondata["cities"] = "error";
+				echo json_encode($jsondata);
+				exit;
+			}
+		}
+}
+
+}
+
+
+
+
+
+
 
 	//////////////////////////////////////////////////////////////// upload
 		if ((isset($_GET["upload"])) && ($_GET["upload"] == true)) {
@@ -156,59 +228,3 @@ if ((isset($_GET["load_data"])) && ($_GET["load_data"] == true)) {
         exit;
     }
 }
-
-/////////////////////////////////////////////////// load_country
-if(  (isset($_GET["load_country"])) && ($_GET["load_country"] == true)  ){
-		$json = array();
-
-    	$url = 'http://www.oorsprong.org/websamples.countryinfo/CountryInfoService.wso/ListOfCountryNamesByName/JSON';
-		$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
-		$json = loadModel($path_model, "user_model", "obtain_countries", $url);
-
-		if($json){
-			echo $json;
-			exit;
-		}else{
-			$json = "error";
-			echo $json;
-			exit;
-		}
-	}
-
-/////////////////////////////////////////////////// load_provinces
-if(  (isset($_GET["load_provinces"])) && ($_GET["load_provinces"] == true)  ){
-    	$jsondata = array();
-        $json = array();
-
-		$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
-		$json = loadModel($path_model, "user_model", "obtain_provinces");
-
-		if($json){
-			$jsondata["provinces"] = $json;
-			echo json_encode($jsondata);
-			exit;
-		}else{
-			$jsondata["provinces"] = "error";
-			echo json_encode($jsondata);
-			exit;
-		}
-	}
-
-/////////////////////////////////////////////////// load_cities
-if(  isset($_POST['idPoblac']) ){
-	    $jsondata = array();
-        $json = array();
-
-		$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
-		$json = loadModel($path_model, "user_model", "obtain_cities", $_POST['idPoblac']);
-
-		if($json){
-			$jsondata["cities"] = $json;
-			echo json_encode($jsondata);
-			exit;
-		}else{
-			$jsondata["cities"] = "error";
-			echo json_encode($jsondata);
-			exit;
-		}
-	}

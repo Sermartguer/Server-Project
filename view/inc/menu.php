@@ -15,7 +15,7 @@
               <a class="nav-link js-scroll-trigger text-white" href="<?php amigable('index.php?module=list_rooms&view=list_rooms'); ?>">List Rooms</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger text-white" href="index.php?module=rooms&view=create_rooms">Rooms</a>
+              <a class="nav-link js-scroll-trigger text-white" href="<?php amigable('?module=rooms&function=form_rooms'); ?>">Rooms</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger text-white" href="index.php?module=contact">Contact</a>

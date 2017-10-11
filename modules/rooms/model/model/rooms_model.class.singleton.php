@@ -1,17 +1,10 @@
 <?php
-
-$path = $_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/';
-//define('SITE_ROOT', $path);
-if (!defined('SITE_ROOT')) define('SITE_ROOT', $path);
-
-require(SITE_ROOT . "modules/rooms/model/BLL/user_bll.class.singleton.php");
-
-class user_model {
+class rooms_model {
     private $bll;
     static $_instance;
 
     private function __construct() {
-        $this->bll = user_bll::getInstance();
+        $this->bll = rooms_bll::getInstance();
     }
 
     public static function getInstance() {

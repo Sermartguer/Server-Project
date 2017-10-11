@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>form_rooms</name>
+        <uri>form_rooms</uri>
+    </function>
+    <function>
+        <name>load_countries</name>
+        <uri>load_countries</uri>
+    </function>
+    <function>
+        <name>load_provinces</name>
+        <uri>load_provinces</uri>
+    </function>
+    <function>
+        <name>load_towns</name>
+        <uri>load_towns</uri>
+    </function>
+</functions>

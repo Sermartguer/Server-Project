@@ -2,7 +2,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.css">
 
-<script type="text/javascript" src="modules/rooms/view/js/rooms.js"></script>
+<script type="text/javascript" src="<?php echo rooms_JS_PATH?>rooms.js"></script>
 
 <section id="contact-page">
     <div class="container mt-5" style="padding-top:50px;">
@@ -337,37 +337,6 @@
                     </div>
                   </div>
                 </div>
-
-
-
-
-
-                <!--<div class="row card">
-                  <div class="col-12">
-                    <label>Sort description *</label>
-                    <input type="text" name="sdesc" id="sdesc" placeholder="Sort Description" class="form-control" value="asdsadas" required="required">
-                    <div id="e_sdesc"></div>
-                    <small  class="form-text text-muted">Please, not enter more than 8 words.</small>
-                  </div>
-                </div>-->
-
-
-
-                <!--EndRow
-
-                <div class="row">
-                    <div class="col-6 col-sm-12 col-xl-6">
-                        <h3>Specifications</h3>
-                    </div>
-                    <div class="col-6 col-sm-12 col-xl-6">
-                        <h3>Disponibilidad de MyRoom</h3>
-                        <small id="a" class="form-text text-muted">Please, minimum 1 day</small>
-                    </div>
-                </div>-->
-
-                <!--EndRow-->
-
-
             </form>
 
     </div><!--/.container-->
