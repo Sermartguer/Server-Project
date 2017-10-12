@@ -7,7 +7,7 @@
         <div class="row contact-wrap">
             <div class="status alert alert-success" style="display: none"></div>
             <div id="content"></div>
-            <script type="text/javascript" src="modules/rooms/view/js/list_rooms.js" ></script>
+            <script type="text/javascript" src="<?php echo rooms_JS_PATH ?>list_rooms.js" ></script>
         </div><!--/.row-->
     </div><!--/.container-->
 </section><!--/#contact-page-->

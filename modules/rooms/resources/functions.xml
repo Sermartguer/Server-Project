@@ -16,4 +16,32 @@
         <name>load_towns</name>
         <uri>load_towns</uri>
     </function>
+    <function>
+        <name>load_data</name>
+        <uri>load_data</uri>
+    </function>
+    <function>
+        <name>alta_users</name>
+        <uri>alta_users</uri>
+    </function>
+    <function>
+        <name>loadlist</name>
+        <uri>loadlist</uri>
+    </function>
+    <function>
+        <name>results_rooms</name>
+        <uri>results_rooms</uri>
+    </function>
+    <function>
+        <name>upload_rooms</name>
+        <uri>upload_rooms</uri>
+    </function>
+    <function>
+        <name>delete_rooms</name>
+        <uri>delete_rooms</uri>
+    </function>
+    <function>
+        <name>close_session</name>
+        <uri>close_session</uri>
+    </function>
 </functions>

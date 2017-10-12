@@ -1,8 +1,6 @@
 <?php
 class controller_rooms{
 	function __constructor(){
-		include(FUNCTIONS_rooms . "functions_user.inc.php");
-		        include(UTILS . "upload.php");
 		        $_SESSION['module'] = "rooms";
 	}
 	function form_rooms(){
@@ -12,6 +10,13 @@ class controller_rooms{
 		require_once(VIEW_PATH_INC . "footer.php");
 		require_once(VIEW_PATH_INC ."bottom_page.php");
 	}
+	function results_rooms() {
+		require_once(VIEW_PATH_INC ."top_page.php");
+		require_once(VIEW_PATH_INC ."menu.php");
+			 loadView('modules/rooms/view/', 'results_rooms.php');
+		require_once(VIEW_PATH_INC . "footer.php");
+		require_once(VIEW_PATH_INC ."bottom_page.php");
+	 }
 function load_countries(){
 	/////////////////////////////////////////////////// load_country
 
@@ -19,7 +24,7 @@ function load_countries(){
 
 	    	$url = 'http://www.oorsprong.org/websamples.countryinfo/CountryInfoService.wso/ListOfCountryNamesByName/JSON';
 			//$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
-			$json = loadModel(MODEL_rooms, "user_model", "obtain_countries", $url);
+			$json = loadModel(MODEL_rooms, "rooms_model", "obtain_countries", $url);
 
 			if($json){
 				echo $json;
@@ -30,15 +35,15 @@ function load_countries(){
 				exit;
 			}
 		}
-	
+
 function load_provinces(){
 	/////////////////////////////////////////////////// load_provinces
-	if(  (isset($_GET["load_provinces"])) && ($_GET["load_provinces"] == true)  ){
+
 	    	$jsondata = array();
 	        $json = array();
 
-			$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
-			$json = loadModel($path_model, "user_model", "obtain_provinces");
+			//$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
+			$json = loadModel(MODEL_rooms, "rooms_model", "obtain_provinces");
 
 			if($json){
 				$jsondata["provinces"] = $json;
@@ -49,16 +54,16 @@ function load_provinces(){
 				echo json_encode($jsondata);
 				exit;
 			}
-		}
+
 }
 function load_towns(){
 	/////////////////////////////////////////////////// load_cities
-	if(  isset($_POST['idPoblac']) ){
+
 		    $jsondata = array();
 	        $json = array();
 
-			$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
-			$json = loadModel($path_model, "user_model", "obtain_cities", $_POST['idPoblac']);
+			//$path_model=$_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
+			$json = loadModel(MODEL_rooms, "rooms_model", "obtain_cities", $_POST['aux']);
 
 			if($json){
 				$jsondata["cities"] = $json;
@@ -69,40 +74,27 @@ function load_towns(){
 				echo json_encode($jsondata);
 				exit;
 			}
-		}
-}
 
 }
 
-
-
-
-
-
-
-	//////////////////////////////////////////////////////////////// upload
-		if ((isset($_GET["upload"])) && ($_GET["upload"] == true)) {
-		  $result_avatar = upload_files();
-		   $_SESSION['result_avatar'] = $result_avatar;
-		    //echo debug($_SESSION['result_avatar']); //se mostraría en alert(response); de dropzone.js
-		}
-
-		//////////////////////////////////////////////////////////////// alta_users_json
-		if ((isset($_POST['alta_rooms_json']))) {
-		    alta_users();
-		}
-
-
-	//include 'modules/rooms/utils/functions_rooms.inc.php';
-
+function load_data() {
+	    $jsondata = array();
+	    if (isset($_SESSION['rooms'])) {
+	        $jsondata["rooms"] = $_SESSION['rooms'];
+	        echo json_encode($jsondata);
+	        exit;
+	    } else {
+	        $jsondata["rooms"] = "";
+	        echo json_encode($jsondata);
+	        exit;
+	    }
+}
 
 
 	function alta_users() {
-
-
-
+		include(FUNCTIONS_rooms . "functions_rooms.inc.php");
 			$jsondata = array();
-	    $usersJSON = json_decode($_POST["alta_rooms_json"], true);
+	    $usersJSON = json_decode($_POST["alta_users_json"], true);
 	    $result = validate_user($usersJSON);
 
 	    if (empty($_SESSION['result_avatar'])) {
@@ -131,41 +123,25 @@ function load_towns(){
         'city' => $result['datos']['city'],
 				'avatar' => $result_avatar['datos']
 
-
-
 			);
 			$arrValue = false;
-			$path_model = $_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
-			$arrValue = loadModel($path_model, "user_model", "create_user", $arrArgument);
-			// echo '<script>';
-			// echo "console.log('ArrValue'+'$arrValue')";
-			// echo '</script>';
-			/*echo json_encode($arrValue);
-			die();*/
+			//$path_model = $_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/modules/rooms/model/model/';
+			$arrValue = loadModel(MODEL_rooms, "rooms_model", "create_rooms", $arrArgument);
 
 			if ($arrValue){
 					$mensaje = "Su registro se ha efectuado correctamente, para finalizar compruebe que ha recibido un correo de validacion y siga sus instrucciones";
 			}else{
 					$mensaje = "No se ha podido realizar su alta. Intentelo mas tarde";
 				}
-
-			//$mensaje = "User has been successfully registered";
-
 			$_SESSION['rooms'] = $arrArgument;
 			$_SESSION['msje'] = $mensaje;
 
-			$callback = "index.php?module=rooms&view=results_rooms";
+			$callback = "../../rooms/results_rooms/";
 			$jsondata["success"] = true;
-	        $jsondata["redirect"] = $callback;
-					// echo '<script>';
-					// echo "console.log('ArrValue')";
-					// echo '</script>';
+	    $jsondata["redirect"] = $callback;
 	        echo json_encode($jsondata);
         	exit;
 		} else {
-
-			//$error = $result['error'];
-        //$error_avatar = $result_avatar['error'];
         $jsondata["success"] = false;
         $jsondata["error"] = $result['error'];
         $jsondata["error_avatar"] = $result_avatar['error'];
@@ -181,19 +157,8 @@ function load_towns(){
     }
 }
 
-		//////////////////////////////////////////////////////////////// delete
-if (isset($_GET["delete"]) && $_GET["delete"] == true) {
-    $_SESSION['result_avatar'] = array();
-    $result = remove_files();
-    if ($result === true) {
-        echo json_encode(array("res" => true));
-    } else {
-        echo json_encode(array("res" => false));
-    }
-}
 
-//////////////////////////////////////////////////////////////// load
-if (isset($_GET["load"]) && $_GET["load"] == true) {
+function loadlist(){
     $jsondata = array();
     if (isset($_SESSION['rooms'])) {
         //echo debug($_SESSION['user']);
@@ -206,25 +171,26 @@ if (isset($_GET["load"]) && $_GET["load"] == true) {
     close_session();
     echo json_encode($jsondata);
     exit;
+
+}
+function upload_rooms() {
+	 include(UTILS . "upload.php");
+            $result_avatar = upload_files();
+            $_SESSION['result_avatar'] = $result_avatar;
+            echo debugPHP($_SESSION['result_avatar']); // show it   in alert(response) dropzone
+        }
+function delete_rooms(){
+	 include(UTILS . "upload.php");
+						$_SESSION['result_avatar'] = array();
+					$result = remove_files();
+					if ($result === true) {
+							echo json_encode(array("res" => true));
+					} else {
+							echo json_encode(array("res" => false));
+					}
+
+
+}
 }
 
-function close_session() {
-    unset($_SESSION['rooms']);
-    unset($_SESSION['msje']);
-    $_SESSION = array(); // Destruye todas las variables de la sesión
-    session_destroy(); // Destruye la sesión
-}
-
-/////////////////////////////////////////////////// load_data
-if ((isset($_GET["load_data"])) && ($_GET["load_data"] == true)) {
-    $jsondata = array();
-    if (isset($_SESSION['rooms'])) {
-        $jsondata["rooms"] = $_SESSION['rooms'];
-        echo json_encode($jsondata);
-        exit;
-    } else {
-        $jsondata["rooms"] = "";
-        echo json_encode($jsondata);
-        exit;
-    }
-}
+		//////////////////////////////////////////////////////////////// delete

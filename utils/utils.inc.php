@@ -9,7 +9,10 @@
 	function redirect($url){
 		die('<script>top.location.href="'.$url .'";</script>');
 	}
-
+  function close_session() {
+      $_SESSION = array(); // Destruye todas las variables de la sesión
+      session_destroy(); // Destruye la sesión
+  }
   function amigable($url, $return = false) {
       $amigableson = URL_AMIGABLES;
       $link = "";
@@ -24,7 +27,7 @@
       }
       if ($return) {
           return SITE_PATH . $link;
-          
+
       }
       echo SITE_PATH . $link;
   }

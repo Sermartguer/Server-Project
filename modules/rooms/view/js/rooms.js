@@ -103,8 +103,8 @@ $(document).ready(function () {
         validate_rooms();
     });
 //Control de seguridad para evitar que al volver atrás de la pantalla results a create, no nos imprima los datos
-
-    $.get("/a/Server-Project/modules/rooms/controller/controller_rooms.class.php?load_data=true",
+  var amig =amigable_js("?module=rooms&function=load_data");
+    $.get(amig,
             function (response) {
                 //alert(response.user);
                 if (response.rooms === "") {
@@ -174,14 +174,15 @@ $(document).ready(function () {
 
                 //Dropzone function //////////////////////////////////
     $("#dropzone").dropzone({
-        url: "modules/rooms/controller/controller_rooms.class.php?upload=true",
+
+        url: "../../rooms/upload_rooms/",
         addRemoveLinks: true,
         maxFileSize: 1000,
         dictResponseError: "Ha ocurrido un error en el server",
         acceptedFiles: 'image/*,.jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF,.rar,application/pdf,.psd',
         init: function () {
             this.on("success", function (file, response) {
-                //alert(response);
+                console.log(response);
                 $("#progress").show();
                 $("#bar").width('100%');
                 $("#percent").html('100%');
@@ -199,16 +200,18 @@ $(document).ready(function () {
         },
         removedfile: function (file, serverFileName) {
             var name = file.name;
+            var amigable = amigable_js("index.php?module=rooms&function=delete_rooms&filename="+name);
+            console.log(amigable);
             $.ajax({
                 type: "POST",
-                url: "modules/rooms/controller/controller_rooms.class.php?delete=true",
-                data: "filename=" + name,
+                url: "../../rooms/delete_rooms/",//"index.php?module=users&function=delete_users&delete=true",
+                  data: {"filename":name},
                 success: function (data) {
                     $("#progress").hide();
                     $('.msg').text('').removeClass('msg_ok');
                     $('.msg').text('').removeClass('msg_error');
                     $("#e_avatar").html("");
-
+                    console.log(data);
                     var json = JSON.parse(data);
                     if (json.res === true) {
                         var element;
@@ -444,9 +447,10 @@ function validate_rooms(){
         var data_users_JSON = JSON.stringify(data);
         console.log("Stringfy"+data_users_JSON);
 
-
-        $.post('modules/rooms/controller/controller_rooms.class.php',
-            {alta_rooms_json: data_users_JSON},
+        //var amig =amigable_js("?module=rooms&function=alta_users&aux="+data_users_JSON);
+        //console.log(amig);
+        $.post('../../rooms/alta_users/',
+                {alta_users_json: data_users_JSON},
 
         function (response) {
             window.location.href = response.redirect;
@@ -603,12 +607,13 @@ function load_countries_v1() {
     console.log(amig);
     $.post(amig,
             function (response) {
-                console.log(response);
+                //console.log(response);
                 if (response === 'error') {
                     load_countries_v2("../../resources/ListOfCountryNamesByName.json");
                 } else {
+                  console.log("entra aci");
                     //"index.php?module=users&function=load_countries_users&load_country=true"
-                    load_countries_v2("../../rooms/load_countries/load_country"); //oorsprong.org
+                    load_countries_v2(amig); //oorsprong.org
                 }
             })
             .fail(function (response) {
@@ -633,7 +638,8 @@ function load_provinces_v2() {
 }
 
 function load_provinces_v1() { //provinciasypoblaciones.xml - xpath
-    $.get( "modules/rooms/controller/controller_rooms.class.php?load_provinces=true",
+  var amig =amigable_js("?module=rooms&function=load_provinces");
+    $.get( amig,
         function( response ) {
           $("#province").empty();
 	        $("#province").append('<option value="" selected="selected">Select province</option>');
@@ -661,7 +667,7 @@ function load_provinces_v1() { //provinciasypoblaciones.xml - xpath
 }
 
 function load_cities_v2(prov) {
-    $.get("resources/provinciasypoblaciones.xml", function (xml) {
+    $.get("../../resources/provinciasypoblaciones.xml", function (xml) {
 		$("#city").empty();
 	    $("#city").append('<option value="" selected="selected">Select city</option>');
 
@@ -677,8 +683,12 @@ function load_cities_v2(prov) {
 }
 
 function load_cities_v1(prov) { //provinciasypoblaciones.xml - xpath
-    var datos = { idPoblac : prov  };
-	$.post("modules/rooms/controller/controller_rooms.class.php", datos, function(response) {
+    //var datos = { idPoblac : prov  };
+    var amig =amigable_js("?module=rooms&function=load_towns&aux="+prov);
+    console.log(amig);
+	$.post(amig,
+
+  function(response) {
 	    //alert(response);
         var json = JSON.parse(response);
 		var cities=json.cities;

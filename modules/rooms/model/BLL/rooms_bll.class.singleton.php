@@ -16,8 +16,8 @@ class rooms_bll {
         return self::$_instance;
     }
 
-    public function create_user_BLL($arrArgument) {
-        return $this->dao->create_user_DAO($this->db, $arrArgument);
+    public function create_rooms_BLL($arrArgument) {
+        return $this->dao->create_rooms_DAO($this->db, $arrArgument);
     }
     public function obtain_countries_BLL($url){
       return $this->dao->obtain_countries_DAO($url);

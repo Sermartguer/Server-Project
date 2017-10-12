@@ -15,7 +15,7 @@ class rooms_dao {
         return self::$_instance;
     }
 
-    public function create_user_DAO($db, $arrArgument) {
+    public function create_rooms_DAO($db, $arrArgument) {
       // echo '<script>';
       // echo 'console.log("A crear")';
       // echo '</script>';

@@ -1,5 +1,8 @@
 function load_users() {
-    var jqxhr = $.get("modules/rooms/controller/controller_rooms.class.php?load=true", function (data) {
+    var amig =amigable_js("?module=rooms&function=loadlist");
+    console.log(amig);
+    var jqxhr = $.get(amig, function (data) {
+      console.log(data);
         var json = JSON.parse(data);
         console.log(json);
         pintar_rooms(json);
@@ -104,7 +107,7 @@ function pintar_rooms(data) {
     //console.log(cad);
     //var cad = cad.toLowerCase();
     var img = document.createElement("div");
-    var html = '<img src="' + cad + '" height="75" width="75"> ';
+    var html = '<img src="../../' + cad + '" height="75" width="75"> ';
     img.innerHTML = html;
     //alert(html);
 
@@ -130,4 +133,16 @@ function pintar_rooms(data) {
 
     content.appendChild(div_user);
     content.appendChild(img);
+}
+function amigable_js(url) {
+    var backurl="";
+    url = url.replace("?", "");
+    url = url.split("&");
+
+    for (var i=0;i<url.length;i++) {
+        var aux = url[i].split("=");
+        backurl +=  "/"+aux[1];
+    }
+    var SITEROOT = "https://localhost/a/Server-Project"
+    return SITEROOT + backurl;
 }

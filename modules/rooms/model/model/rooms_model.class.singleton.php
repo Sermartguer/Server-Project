@@ -13,8 +13,8 @@ class rooms_model {
         return self::$_instance;
     }
 
-    public function create_user($arrArgument) {
-        return $this->bll->create_user_BLL($arrArgument);
+    public function create_rooms($arrArgument) {
+        return $this->bll->create_rooms_BLL($arrArgument);
 
     }
     public function obtain_countries($url){
