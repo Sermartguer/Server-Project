@@ -1,4 +1,4 @@
-<script type="text/javascript" src="modules/list_rooms/view/js/detail_room.js" ></script>
+<script type="text/javascript" src="<?php echo listrooms_JS_PATH ?>detail_room.js" ></script>
 <section id="contact-page">
     <div class="containera mt-5">
         <div class="row">

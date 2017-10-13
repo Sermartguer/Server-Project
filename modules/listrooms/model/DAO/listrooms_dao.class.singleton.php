@@ -1,5 +1,5 @@
 <?php
-class listroomsDAO {
+class listrooms_dao {
     static $_instance;
 
     private function __construct() {

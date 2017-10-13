@@ -9,7 +9,7 @@
         <uri>rooms</uri>
     </module>
     <module>
-        <name>list_rooms</name>
-        <uri>list_rooms</uri>
+        <name>listrooms</name>
+        <uri>listrooms</uri>
     </module>
 </modules>

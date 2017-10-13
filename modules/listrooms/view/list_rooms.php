@@ -1,4 +1,4 @@
-<script type="text/javascript" src="modules/list_rooms/view/js/lists_rooms.js" ></script>
+<script type="text/javascript" src="<?php echo listrooms_JS_PATH ?>lists_rooms.js" ></script>
 <section id="contact-page">
     <div class="container mt-5" style="padding-top:50px;">
         <div class="center">

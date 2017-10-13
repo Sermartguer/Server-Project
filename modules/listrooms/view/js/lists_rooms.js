@@ -6,13 +6,15 @@ function load_rooms(limit) {
      limit=3;
   }
   console.log(limit);
+  var am = amigable_js("index.php?module=listrooms&function=get_data&aux="+limit);
+  console.log(am);
   $.ajax({
         type: 'GET',
-        url: "/a/Server-Project/modules/list_rooms/controller/controller_listrooms.class.php?get_data="+limit,
+        url: am,
         // dataType: 'json',
         async: false
       }).done(function(data) {
-        //console.log(data);
+        console.log(data);
         var json = JSON.parse(data);
         //console.log(data);
         pintar_rooms(json);
@@ -29,16 +31,18 @@ function load_rooms(limit) {
 
 
 function list_id(id){
-
+    var am = amigable_js("index.php?module=listrooms&function=list_id&aux="+id);
       $.ajax({
         type: 'GET',
-        url: "/a/Server-Project/modules/list_rooms/controller/controller_listrooms.class.php?list_id="+id,
+        url: am,
         async: false
       }).done(function(data){
+        console.log(am);
         var json = JSON.parse(data);
-      // console.log(json);
-
-      window.location.href = json.redirect;
+       console.log(json);
+     var ami = amigable_js(json.redirect);
+      console.log(ami);
+      window.location.href = ami;
 
     }).fail(function(xhr){
 
@@ -124,7 +128,7 @@ function pintar_rooms(data) {
 //SCROLL FUNCTION
 function scroll(){
   $(window).scroll(function () {
-  
+
     if($(window).scrollTop() + $(window).height()+2 >= $(document).height()){
 
       clearTimeout($.data(this, 'scrollTimer'));
@@ -150,4 +154,16 @@ function click_test(){
     // console.log(id); //25
     list_id(id);
   });
+}
+function amigable_js(url) {
+    var backurl="";
+    url = url.replace("?", "");
+    url = url.split("&");
+
+    for (var i=0;i<url.length;i++) {
+        var aux = url[i].split("=");
+        backurl +=  "/"+aux[1];
+    }
+    var SITEROOT = "https://localhost/a/Server-Project"
+    return SITEROOT + backurl;
 }

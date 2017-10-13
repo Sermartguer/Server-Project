@@ -46,13 +46,13 @@ define('MODEL_rooms', SITE_ROOT . 'modules/rooms/model/model/');
 define('rooms_JS_PATH', SITE_PATH . 'modules/rooms/view/js/');
 
 //model list_rooms
-define('UTILS_list_rooms', SITE_ROOT . 'modules/list_rooms/utils/');
-define('list_rooms_JS_LIB_PATH', SITE_PATH . 'modules/list_rooms/view/lib/');
-define('list_rooms_JS_PATH', SITE_PATH . 'modules/list_rooms/view/js/');
-define('MODEL_PATH_list_rooms', SITE_ROOT . 'modules/list_rooms/model/');
-define('DAO_list_rooms', SITE_ROOT . 'modules/list_rooms/model/DAO/');
-define('BLL_list_rooms', SITE_ROOT . 'modules/list_rooms/model/BLL/');
-define('MODEL_list_rooms', SITE_ROOT . 'modules/list_rooms/model/model/');
+define('UTILS_listrooms', SITE_ROOT . 'modules/listrooms/utils/');
+define('listrooms_JS_LIB_PATH', SITE_PATH . 'modules/listrooms/view/lib/');
+define('listrooms_JS_PATH', SITE_PATH . 'modules/listrooms/view/js/');
+define('MODEL_PATH_listrooms', SITE_ROOT . 'modules/listrooms/model/');
+define('DAO_listrooms', SITE_ROOT . 'modules/listrooms/model/DAO/');
+define('BLL_listrooms', SITE_ROOT . 'modules/listrooms/model/BLL/');
+define('MODEL_listrooms', SITE_ROOT . 'modules/listrooms/model/model/');
 
 //amigables
 define('URL_AMIGABLES', TRUE);

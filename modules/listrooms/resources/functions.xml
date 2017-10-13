@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>list_rooms</name>
+        <uri>list_rooms</uri>
+    </function>
+    <function>
+        <name>get_data</name>
+        <uri>get_data</uri>
+    </function>
+    <function>
+        <name>list_id</name>
+        <uri>list_id</uri>
+    </function>
+    <function>
+        <name>details_rooms</name>
+        <uri>details_rooms</uri>
+    </function>
+    <function>
+        <name>load_details</name>
+        <uri>load_details</uri>
+    </function>
+</functions>

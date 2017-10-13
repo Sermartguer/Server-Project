@@ -622,7 +622,7 @@ function load_countries_v1() {
 }
 
 function load_provinces_v2() {
-    $.get("resources/provinciasypoblaciones.xml", function (xml) {
+    $.get("../../resources/provinciasypoblaciones.xml", function (xml) {
 	    $("#province").empty();
 	    $("#province").append('<option value="" selected="selected">Select province</option>');
 
@@ -638,7 +638,7 @@ function load_provinces_v2() {
 }
 
 function load_provinces_v1() { //provinciasypoblaciones.xml - xpath
-  var amig =amigable_js("?module=rooms&function=load_provinces");
+  var amig = amigable_js("?module=rooms&function=load_provinces");
     $.get( amig,
         function( response ) {
           $("#province").empty();
@@ -647,15 +647,11 @@ function load_provinces_v1() { //provinciasypoblaciones.xml - xpath
             //alert(response);
         var json = JSON.parse(response);
 		    var provinces=json.provinces;
-		    //alert(provinces);
-		    //console.log(provinces);
-
-		    //alert(provinces[0].id);
-		    //alert(provinces[0].nombre);
-
+        console.log(json.provinces);
             if(provinces === 'error'){
                 load_provinces_v2();
             }else{
+
                 for (var i = 0; i < provinces.length; i++) {
         		    $("#province").append("<option value='" + provinces[i].id + "'>" + provinces[i].nombre + "</option>");
     		    }

@@ -1,8 +1,8 @@
 function load_detail_room() {
-
+var am = amigable_js("index.php?module=listrooms&function=load_details");
     $.ajax({
       type: 'GET',
-      url: "/a/Server-Project/modules/list_rooms/controller/controller_listrooms.class.php?detail_rooms",
+      url: am,
       async: false
     }).done(function(data){
       var json = JSON.parse(data);
@@ -82,7 +82,19 @@ function print_details_rooms(room) {
 
   document.getElementById("name").innerHTML =room[0].name;
   document.getElementById("email").innerHTML = "Email: "+room[0].email;
-  document.getElementById("avatar").setAttribute("src",room[0].avatar);
+  document.getElementById("avatar").setAttribute("src","../"+room[0].avatar);
 
 
+}
+function amigable_js(url) {
+    var backurl="";
+    url = url.replace("?", "");
+    url = url.split("&");
+
+    for (var i=0;i<url.length;i++) {
+        var aux = url[i].split("=");
+        backurl +=  "/"+aux[1];
+    }
+    var SITEROOT = "https://localhost/a/Server-Project"
+    return SITEROOT + backurl;
 }
