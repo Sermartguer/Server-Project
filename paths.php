@@ -54,5 +54,7 @@ define('DAO_listrooms', SITE_ROOT . 'modules/listrooms/model/DAO/');
 define('BLL_listrooms', SITE_ROOT . 'modules/listrooms/model/BLL/');
 define('MODEL_listrooms', SITE_ROOT . 'modules/listrooms/model/model/');
 
+//MODEL CONTACT
+define('CONTACT_JS_PATH', SITE_PATH . 'modules/contact/view/js/');
 //amigables
 define('URL_AMIGABLES', TRUE);

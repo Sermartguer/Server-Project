@@ -12,4 +12,8 @@
         <name>listrooms</name>
         <uri>listrooms</uri>
     </module>
+    <module>
+        <name>contact</name>
+        <uri>contact</uri>
+    </module>
 </modules>
