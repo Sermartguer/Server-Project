@@ -20,7 +20,7 @@
     	    $mail_content = json_decode($_POST["data_contact"], true);
           if($mail_content){
             //$json = send_mailgun($mail_content['email']);
-             $json = send_mailgun($mail_content['email'],$mail_content['message']);
+             $json = send_mailgun($mail_content['email'],$mail_content['message'],$mail_content['subject'],$mail_content['name']);
             $jsondata['success'] = $json;
           }else{
             $jsondata['success'] = $json;

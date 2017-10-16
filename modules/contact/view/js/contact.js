@@ -35,6 +35,7 @@ function validate_contact(){
     error = false;
   }
   if(error === true){
+    console.log(typeof(message.value));
   var data = {"name":name.value,"email":email.value,"subject":subject.value, "message": message.value};
   var data_contactJSON = JSON.stringify(data);
   console.log(data_contactJSON);

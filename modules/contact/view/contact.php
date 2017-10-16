@@ -28,9 +28,9 @@
                                   Subject</label>
                               <select id="subject" name="subject" class="form-control" required="required">
                                   <option value="na" selected="">Choose One:</option>
-                                  <option value="general">General</option>
-                                  <option value="technical">Technical</option>
-                                  <option value="other">Other</option>
+                                  <option value="General">General</option>
+                                  <option value="Technical">Technical</option>
+                                  <option value="Other">Other</option>
                               </select>
                                 <span id="err_subject"style='color:red;'></span>
                           </div>
