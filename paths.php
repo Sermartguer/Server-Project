@@ -4,7 +4,7 @@ $path = $_SERVER['DOCUMENT_ROOT'] . '/a/Server-Project/';
 define('SITE_ROOT', $path);
 
 //SITE_PATH
-define('SITE_PATH', 'https://' . $_SERVER['HTTP_HOST'] . '/a/Server-Project/');
+define('SITE_PATH', 'http://' . $_SERVER['HTTP_HOST'] . '/a/Server-Project/');
 
 //CSS
 define('CSS_PATH', SITE_PATH . 'view/css/');

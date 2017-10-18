@@ -4,6 +4,7 @@
 
         public function __construct() {
             $_SESSION['module'] = "contact";
+            include(UTILS . "mail.inc.php");
         }
 
         public function view_contact() {

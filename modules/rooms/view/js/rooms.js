@@ -717,7 +717,7 @@ function amigable_js(url) {
         var aux = url[i].split("=");
         backurl +=  "/"+aux[1];
     }
-    var SITEROOT = "https://localhost/a/Server-Project"
+    var SITEROOT = "http://localhost/a/Server-Project"
     return SITEROOT + backurl;
 }
 
